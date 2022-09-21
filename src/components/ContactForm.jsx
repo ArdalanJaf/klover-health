@@ -19,8 +19,7 @@ function ContactForm() {
   // Send user-inputs to back-end.
   const sendFormData = async (payload) => {
     try {
-      const result = await axios.post(API_URL + "/messaging", payload);
-      document.getElementById("contactForm").reset();
+      const result = await axios.post(API_URL + "/contact", payload);
 
       // notify user that API is down, advise to email me.
       if (result.data.status === 0) {
@@ -34,6 +33,7 @@ function ContactForm() {
 
         // notify user message recieved
       } else {
+        document.getElementById("contactForm").reset();
         setMessageSent(true);
       }
     } catch (error) {

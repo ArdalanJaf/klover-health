@@ -4,8 +4,8 @@ export const adminSlice = createSlice({
   name: "admin",
   initialState: {
     prices: {
-      preAssessment: 40,
-      assessment: 300,
+      preAssessment: 4000,
+      assessment: 30000,
     },
     contact: {
       phone: "",

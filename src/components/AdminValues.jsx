@@ -11,7 +11,7 @@ function AdminValues() {
 
   const getAdminContact = async () => {
     try {
-      const results = await axios.get(API_URL + "/admin_contact");
+      const results = await axios.get(API_URL + "/admin/contact");
       dispatch(setContact(results.data.result[0]));
       console.log(results.data.result[0]);
     } catch (error) {
@@ -21,7 +21,7 @@ function AdminValues() {
 
   const setAdminContact = async (payload) => {
     try {
-      const results = await axios.post(API_URL + "/admin_contact", payload);
+      const results = await axios.post(API_URL + "/admin/contact", payload);
       console.log(results.data.status === 1 ? "changed" : "failed");
     } catch (error) {
       alert("API down " + error);

@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 function Landing() {
   return (
-    <StyledLanding>
+    <StyledLanding className="container-fluid">
       <h3>Get you the attention you need...</h3>
       <p>
         Get an assessment by a fully certified, experienced psychiatrist to get
         NHS mental health assistance faster.
       </p>
-      <button>Book Now</button> {/* call to action */}
+      <button className="btn btn-primary">Book Now</button>{" "}
+      {/* call to action */}
     </StyledLanding>
   );
 }

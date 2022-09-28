@@ -10,6 +10,7 @@ function PayButton({ item, timeSlot, coupon }) {
     try {
       const results = await axios.post(API_URL + "/stripe/payment", payload);
       if (results.data.url) {
+        // console.log(results.data);
         window.location.href = results.data.url;
       }
     } catch (error) {
@@ -18,14 +19,15 @@ function PayButton({ item, timeSlot, coupon }) {
   };
 
   return (
-    <>
+    <div className="text-center py-4">
       <button
+        className="btn btn-lg btn-primary px-10 shadow"
         type="submit"
         onClick={() => handleCheckout({ item, timeSlot, coupon })}
       >
         Checkout
       </button>
-    </>
+    </div>
   );
 }
 

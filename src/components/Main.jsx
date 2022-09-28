@@ -11,16 +11,16 @@ import Booking from "./Booking";
 
 function Main() {
   return (
-    <StyledMain>
+    <div className="container">
       <Header />
-      <Landing />
-      <About />
+      {/* <Landing /> */}
+      {/* <About /> */}
       {/* <Products /> */}
       <Booking />
       {/* <ContactForm /> */}
-      {/* <AdminValues /> */}
+      <AdminValues />
       {/* <PayButton /> */}
-    </StyledMain>
+    </div>
   );
 }
 

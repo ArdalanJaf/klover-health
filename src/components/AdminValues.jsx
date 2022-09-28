@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { API_URL } from "../config/API_URL";
-import { setContact } from "../redux/adminSlice";
+import { setContact, setTimeslots } from "../redux/adminSlice";
 
 function AdminValues() {
-  const { prices, contact, timeSlots } = useSelector((state) => state.admin);
+  const { prices, contact, timeslots } = useSelector((state) => state.admin);
   const [localContact, setLocalContact] = useState({});
   const dispatch = useDispatch();
 
@@ -24,6 +24,16 @@ function AdminValues() {
       const results = await axios.post(API_URL + "/admin/contact", payload);
       console.log(results.data.status === 1 ? "changed" : "failed");
     } catch (error) {
+      alert("API down " + error);
+    }
+  };
+
+  const getTimeslots = async () => {
+    try {
+      const results = await axios.get(API_URL + "/admin/timeslots");
+      dispatch(setTimeslots(results.data.timeslots));
+    } catch (error) {
+      // message to tell user to contact Risha directly
       alert("API down " + error);
     }
   };
@@ -69,6 +79,15 @@ function AdminValues() {
           CHANGE CONTACT
         </button>
       </form>
+      <button
+        type="submit"
+        name="submit"
+        onClick={(e) => {
+          getTimeslots();
+        }}
+      >
+        GET TIME INFO
+      </button>
     </div>
   );
 }

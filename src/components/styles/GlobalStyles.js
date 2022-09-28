@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
     * {
-        box-sizing: border-box;
+        /* box-sizing: border-box; */
     }
 
     h1 {
@@ -16,10 +16,10 @@ const GlobalStyles = createGlobalStyle`
     h3 {
 
     }
-    
+
     p {
-        font-size: 1em;
-        color: #fff;
+        /* font-size: 1em;
+        color: #fff; */
     }`;
 
 export default GlobalStyles;

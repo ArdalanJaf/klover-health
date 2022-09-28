@@ -11,10 +11,7 @@ export const adminSlice = createSlice({
       phone: "",
       email: "",
     },
-    timeSlots: {
-      available: [],
-      exemptions: [],
-    },
+    timeslots: [],
   },
   reducers: {
     setPrices: (state, action) => {
@@ -23,9 +20,12 @@ export const adminSlice = createSlice({
     setContact: (state, action) => {
       state.contact = action.payload;
     },
+    setTimeslots: (state, action) => {
+      state.timeslots = action.payload;
+    },
   },
 });
 
-export const { setPrices, setContact } = adminSlice.actions;
+export const { setPrices, setContact, setTimeslots } = adminSlice.actions;
 
 export default adminSlice.reducer;

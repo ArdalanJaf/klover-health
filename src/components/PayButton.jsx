@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { API_URL } from "../config/API_URL";
+import { API_URL } from "../API/API_URL";
 
-function PayButton({ item, timeSlot, coupon }) {
-  const prices = useSelector((state) => state.admin.prices);
-
+function PayButton({
+  productId,
+  name,
+  timeslot,
+  couponId,
+  disabled,
+  setCouponErr,
+}) {
   const handleCheckout = async (payload) => {
     try {
       const results = await axios.post(API_URL + "/stripe/payment", payload);
@@ -13,17 +17,21 @@ function PayButton({ item, timeSlot, coupon }) {
         // console.log(results.data);
         window.location.href = results.data.url;
       }
+      if (results.data.error.param === "discounts[0][coupon]") {
+        setCouponErr(results.data.error.raw.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="text-center py-4">
+    <div className="text-center">
       <button
+        disabled={disabled}
         className="btn btn-lg btn-primary px-10 shadow"
         type="submit"
-        onClick={() => handleCheckout({ item, timeSlot, coupon })}
+        onClick={() => handleCheckout({ productId, name, timeslot, couponId })}
       >
         Checkout
       </button>

@@ -1,0 +1,11 @@
+.available {
+  background-color: green;
+}
+
+.exception {
+  background-color: red;
+}
+
+.excSlot {
+  color: red;
+}

@@ -1,30 +1,35 @@
 import React from "react";
-import styled from "styled-components";
 
 function About() {
   return (
-    <StyledAbout>
-      <h2>About Richa</h2>
+    <div className="pb-5">
+      <h2>Specialised assessments</h2>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem culpa
-        hic magnam officiis molestiae adipisci quia eos alias deleniti.
-        Blanditiis repudiandae exercitationem deleniti reiciendis perspiciatis,
-        facere maiores optio eos dolorem totam impedit beatae sequi aliquid
-        quisquam, accusantium autem laborum, animi quos. Enim, voluptate
-        consectetur voluptates earum quia aut ipsam nesciunt.
+        Get a mental health assessments in the primary care setting – this means
+        that when going to the GP regarding an issue or concern regarding mental
+        health, but feel limited by the time restrictions in place, I can offer
+        a more detailed specialised assessment to provide GPs with a treatment
+        recommendation.
       </p>
-      <p>link to linkedin?</p>
-    </StyledAbout>
+      <p>
+        This service is ideal for those that feel they have on-going mental
+        health problems but are able to continue functioning – in the sense that
+        a person can keeping on ticking by but they feel as though there is some
+        lack of clarity regarding their mental health, or options to resolve
+        these.{" "}
+      </p>
+      <p>
+        Please note, though I offer a broad service, I cannot provide formal
+        ADHD assessments or ASD diagnosis, though we can discuss these.
+      </p>
+      <p>
+        *** Please note – should you have thoughts of suicide it is important to
+        contact your Local Mental Health Crisis Service or in a Mental Health
+        Emergency – contact Emergency services
+      </p>
+      <p>Ardo's notes: What ? Why? How? </p>
+    </div>
   );
 }
 
 export default About;
-
-const StyledAbout = styled.div`
-  width: 100vw;
-  background-color: red;
-
-  h2 {
-    margin: 0;
-  }
-`;

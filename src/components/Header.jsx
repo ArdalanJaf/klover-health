@@ -4,11 +4,8 @@ import styled from "styled-components";
 function Header() {
   return (
     <StyledHeader>
-      <h1>Klover Health</h1>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse,
-        distinctio!
-      </p>
+      <h1>Klover Healthcare</h1>
+      <p>Providing mental health assessments to get NHS support faster.</p>
     </StyledHeader>
   );
 }

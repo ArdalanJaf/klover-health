@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import About from "./About";
-import AdminValues from "./AdminValues";
+import AdminValues from "./admin/AdminValues";
 import ContactForm from "./ContactForm";
 import Header from "./Header";
 import Landing from "./Landing";
@@ -8,18 +8,49 @@ import PayButton from "./PayButton";
 import Products from "./Products";
 import { StyledMain } from "./styles/Main.styled";
 import Booking from "./Booking";
+import axios from "axios";
+import { API_URL } from "../API/API_URL";
+import { useDispatch } from "react-redux";
+import { setAvailableTs, setPrices } from "../redux/adminSlice";
+import AboutRicha from "./AboutRicha";
 
 function Main() {
+  const dispatch = useDispatch();
+
+  const getAvailableTimeslots = async () => {
+    try {
+      const results = await axios.get(API_URL + "/admin/timeslots");
+      dispatch(setAvailableTs(results.data.availableTs));
+    } catch (error) {
+      // message to tell user to contact Risha directly
+      console.log("API down " + error);
+    }
+  };
+
+  const getPrices = async () => {
+    try {
+      const results = await axios.get(API_URL + "/admin/prices");
+      console.log(results);
+      dispatch(setPrices(results.data.prices));
+    } catch (error) {
+      console.log("API down " + error);
+    }
+  };
+
+  useEffect(() => {
+    getAvailableTimeslots();
+    getPrices();
+  }, []);
+
   return (
-    <div className="container">
+    <div className="container-lg">
       <Header />
-      {/* <Landing /> */}
-      {/* <About /> */}
-      {/* <Products /> */}
-      <Booking />
-      {/* <ContactForm /> */}
-      <AdminValues />
-      {/* <PayButton /> */}
+      <Landing />
+      <About />
+      <Products />
+      <AboutRicha />
+      {/* <Booking /> */}
+      <ContactForm />
     </div>
   );
 }

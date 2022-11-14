@@ -1,99 +1,117 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { numToPrice } from "../utils/numToPrice";
 import PayButton from "./PayButton";
+import emcaToString from "../utils/emcaToString";
 
-function Booking() {
-  const { prices, timeslots } = useSelector((state) => state.admin);
+function Booking({ productId }) {
+  const { prices, availableTs } = useSelector((state) => state.admin);
+  const [name, setName] = useState("");
+  const [timeslot, setTimeslot] = useState();
+  const [checkbox, setCheckbox] = useState(false);
+  const [couponId, setCouponId] = useState("");
+  const [couponErr, setCouponErr] = useState("");
 
   return (
-    <div className="container py-3">
+    <div className="container py-2">
       <div>
-        <h3>Assessment</h3>
-        <p>£{numToPrice(prices.assessment)}</p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam
-          quaerat sint recusandae doloribus voluptate accusamus nostrum cum modi
-          est magni?
-        </p>
-        <form>
-          <label htmlFor="fullName" className="form-label">
+        <div className="form-group mb-3">
+          <label htmlFor="fullName" className="form-label mb-1">
             Full name:
           </label>
           <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             id="fullName"
             name="name"
             className="form-control"
             aria-describedby="nameHelp"
           />
-
-          {/* <label htmlFor="email" className="form-label">
-            Email:
-          </label>
-          <input
-            id="email"
-            name="email"
-            className="form-control mb-4"
-            aria-describedby="nameHelp"
-          />
-
-          <label htmlFor="phone" className="form-label">
-            Phone:
-          </label>
-          <input
-            id="phone"
-            name="tel"
-            className="form-control"
-            aria-describedby="nameHelp"
-          /> */}
-          <div id="nameHelp" className="form-text">
-            We'll never share any of your contact info with anyone else.
+          <div id="nameHelp" className="form-text ms-1">
+            Please enter your full name as written on your NHS records.
           </div>
-
-          <label htmlFor="timeslot" className="form-label">
-            Select time:
+        </div>
+        <div className="form-group mb-3">
+          <label htmlFor="timeslot" className="form-label mb-1">
+            Appointment:
           </label>
-          <select id="timeslot" className="form-select">
-            {timeslots.map((item) => {
+          <select
+            id="timeslot"
+            className="form-select"
+            onChange={(e) => setTimeslot(Number(e.target.value))}
+          >
+            <option value={undefined} label={"Select..."} />
+            {availableTs.map((item, i) => {
               let date = new Date(item);
-              return <option value={item} label={date.toLocaleString()} />;
+              // Minimum time in advance people can book? obv not today...
+              // do this in back end.
+              return <option key={i} value={item} label={emcaToString(date)} />;
             })}
           </select>
-        </form>
-        <PayButton />
+        </div>
+        {/* Adds option to add discount code incase user has already paid for initial consultation*/}
+        {productId === 1 && (
+          <div className="form-group mb-3">
+            <input
+              id="checkbox"
+              type="checkbox"
+              value={checkbox}
+              onChange={() => setCheckbox(!checkbox)}
+            />
+            <label htmlFor="checkbox" className="form-text mb-2 ms-1">
+              {"   "}I have already had an initial consultation
+            </label>
+            {checkbox && (
+              <div>
+                <label htmlFor="coupon" className="form-label mb-1">
+                  Enter coupon code to deduct pre-assesment cost:
+                </label>
+                <input
+                  value={couponId}
+                  onChange={(e) => {
+                    setCouponId(e.target.value);
+                    setCouponErr("");
+                  }}
+                  id="coupon"
+                  className="form-control"
+                />
+                {couponErr.length > 0 && (
+                  <p className="alert alert-danger mt-1">
+                    {couponErr}. Make sure code is correct or make direct
+                    contact.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+        <div className="form-group mb-3">
+          <label htmlFor="checkbox" className="form-text mb-2 ">
+            {/* <input
+              id="checkbox"
+              type="checkbox"
+              className="me-1"
+              value={checkbox}
+              onChange={() => setCheckbox(!checkbox)}
+            /> */}
+            None of your personal information will be shared with any individual
+            or organisation. Upon purchasing an appointment, your name and
+            contact details will be emailed directly to Richa X and Stripe will
+            handle your payment details. None of your data will be stored on
+            this website's database.
+          </label>
+        </div>
+
+        <PayButton
+          productId={productId}
+          name={name}
+          timeslot={timeslot}
+          disabled={name && timeslot ? false : true}
+          couponId={checkbox ? couponId : ""}
+          setCouponErr={setCouponErr}
+        />
       </div>
     </div>
   );
 }
 
 export default Booking;
-
-const timeSlots = [
-  { day: 0, timeStart: "12:30" },
-  { day: 2, timeStart: "16:30" },
-  { day: 3, timeStart: "20:30" },
-];
-
-const days = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-
-const StyledBooking = styled.div`
-  width: 100vw;
-  background-color: #38d4e6;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-// Item + price
-// Description
-// name, email, phone number
-// choose time
-// Checkout button

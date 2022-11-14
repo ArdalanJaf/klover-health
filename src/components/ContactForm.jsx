@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { API_URL } from "../config/API_URL";
+import { API_URL } from "../API/API_URL";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -43,54 +43,86 @@ function ContactForm() {
   };
 
   return (
-    <form
-      className="contactForm"
-      id="contactForm"
-      onInput={(e) => {
-        dispatch(setFormData({ label: e.target.id, value: e.target.value }));
-        // console.log(formData);
-      }}
-    >
-      <input type="text" name="name" id="name" placeholder="YOUR NAME" />
-      {joiErrors.name !== undefined && <JoiErrorNote inputName={"name"} />}
-      <label hidden htmlFor="name">
-        Your name.
-      </label>
+    <div className="container">
+      <h2 className="text-center">Get In Touch</h2>
+      <div className="row">
+        <div className="col-12 col-md-6 order-md-2 text-center">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad labore
+            dolor ullam ut corporis blanditiis, eum reprehenderit incidunt
+            dolorum, atque inventore magnam debitis maxime, a veniam porro ex!
+            Voluptatum, aperiam.
+          </p>
+        </div>
+        <div className="col-12 col-md-6 order-md-1">
+          <form
+            className="contactForm"
+            id="contactForm"
+            onInput={(e) => {
+              dispatch(
+                setFormData({ label: e.target.id, value: e.target.value })
+              );
+              // console.log(formData);
+            }}
+          >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Your name"
+              className="form-control mb-2"
+            />
+            {joiErrors.name !== undefined && (
+              <JoiErrorNote inputName={"name"} />
+            )}
+            <label hidden htmlFor="name">
+              Your name.
+            </label>
 
-      <input type="email" name="email" id="email" placeholder="YOUR EMAIL" />
-      {joiErrors.email && <JoiErrorNote inputName={"email"} />}
-      <label hidden htmlFor="email">
-        Your email address.
-      </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your email"
+              className="form-control mb-2"
+            />
+            {joiErrors.email && <JoiErrorNote inputName={"email"} />}
+            <label hidden htmlFor="email">
+              Your email address.
+            </label>
 
-      <textarea
-        className="textbox"
-        name="message"
-        id="message"
-        rows="6"
-        placeholder="YOUR MESSAGE"
-      />
-      <label hidden htmlFor="message">
-        Your message.
-      </label>
-      {joiErrors.message && <JoiErrorNote inputName={"message"} />}
+            <textarea
+              className="textbox form-control mb-2"
+              name="message"
+              id="message"
+              rows="6"
+              placeholder="Your message"
+            />
+            <label hidden htmlFor="message">
+              Your message.
+            </label>
+            {joiErrors.message && <JoiErrorNote inputName={"message"} />}
+            <div className="text-center">
+              <button
+                className="btn btn-secondary"
+                type="submit"
+                name="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMessageSent(false);
+                  sendFormData(formData);
+                  dispatch(clearJoiErrors());
+                }}
+              >
+                Send
+              </button>
+            </div>
 
-      <button
-        className="submitButton hover"
-        type="submit"
-        name="submit"
-        onClick={(e) => {
-          e.preventDefault();
-          setMessageSent(false);
-          sendFormData(formData);
-          dispatch(clearJoiErrors());
-        }}
-      >
-        GET IN TOUCH
-      </button>
-
-      {messageSent && <MsgSentNotification />}
-    </form>
+            {messageSent && <MsgSentNotification />}
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 

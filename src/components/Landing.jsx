@@ -9,7 +9,9 @@ function Landing() {
         Get an assessment by a fully certified, experienced psychiatrist to get
         NHS mental health assistance faster.
       </p>
-      <button className="btn btn-primary">Book Now</button>{" "}
+      <a href="#products" className="btn btn-primary">
+        Book Now
+      </a>{" "}
       {/* call to action */}
     </StyledLanding>
   );

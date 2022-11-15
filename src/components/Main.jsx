@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import About from "./About";
 import AdminValues from "./admin/AdminValues";
 import ContactForm from "./ContactForm";
+import Nav from "./Nav";
 import Header from "./Header";
-import Landing from "./Landing";
 import PayButton from "./PayButton";
 import Products from "./Products";
 import { StyledMain } from "./styles/Main.styled";
@@ -43,9 +43,9 @@ function Main() {
   }, []);
 
   return (
-    <div className="container-lg">
+    <div className="container-max">
+      <Nav />
       <Header />
-      <Landing />
       <About />
       <Products />
       <AboutRicha />

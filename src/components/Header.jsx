@@ -1,26 +1,38 @@
 import React from "react";
 import styled from "styled-components";
+import img from "../assets/panoramic-3094350_1920.jpg";
 
 function Header() {
   return (
-    <StyledHeader>
-      <h1>Klover Healthcare</h1>
-      <p>Providing mental health assessments to get NHS support faster.</p>
-    </StyledHeader>
+    <div
+      className="container-fluid bg-image"
+      style={{ backgroundImage: `url(${img})` }}
+    >
+      {/* <img src={img} /> */}
+      <h3>Get you the attention you need...</h3>
+      <p>
+        Get an assessment by a fully certified, experienced psychiatrist to get
+        NHS mental health assistance faster.
+      </p>
+      <a href="#products" className="btn btn-primary">
+        Book Now
+      </a>{" "}
+      {/* call to action */}
+    </div>
   );
 }
 
 export default Header;
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  background-color: turquoise;
-  h1 {
-    font-size: 3em;
+  background-color: blue;
+  background-image: url(${img});
+  h3 {
+    font-size: 1.4em;
     color: #fff;
   }
 `;

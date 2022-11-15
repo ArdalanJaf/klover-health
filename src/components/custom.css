@@ -1,0 +1,15 @@
+.headerImg {
+  height: calc(100vh - 55.99px);
+}
+
+.headerContainer {
+  max-height: calc(100vh - 55.99px);
+}
+
+@media (min-width: 576px) {
+  .headerImg {
+    height: auto;
+    max-width: 100%;
+    /* max-height: calc(100vh - 55.99px); */
+  }
+}

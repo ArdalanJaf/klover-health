@@ -35,49 +35,58 @@ const AdminLogin = ({ setLoggedIn }) => {
   };
 
   return (
-    <div className="container">
-      <label>
-        Username:{" "}
-        <input
-          required
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          autoComplete="off"
-        />
-      </label>
-
-      <label>
-        Password:{" "}
-        <input
-          required
-          type={passwordShown ? "text" : "password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="off"
-        />
-      </label>
-
-      <label>
-        <input
-          type="checkbox"
-          value={passwordShown}
-          onChange={() => setPasswordShown(!passwordShown)}
-        />{" "}
-        show password
-      </label>
-
-      <input
-        type="submit"
-        onClick={() => handleSubmit()}
-        disabled={username && password ? false : true}
-      />
-
-      {error && (
-        <div>
-          <p>{error}</p>
+    <div className="container d-flex justify-content-center mt-5">
+      <div>
+        <div className="mb-3">
+          <label>
+            Username:{" "}
+            <input
+              className="form-control"
+              required
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete="off"
+            />
+          </label>
         </div>
-      )}
+        <div>
+          <label>
+            Password:{" "}
+            <input
+              className="form-control"
+              required
+              type={passwordShown ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+            />
+          </label>
+        </div>
+        <label>
+          <input
+            className="mb-4"
+            type="checkbox"
+            value={passwordShown}
+            onChange={() => setPasswordShown(!passwordShown)}
+          />{" "}
+          show password
+        </label>
+        <div className="text-center">
+          <input
+            className="btn btn-primary"
+            type="submit"
+            onClick={() => handleSubmit()}
+            disabled={username && password ? false : true}
+          />
+
+          {error && (
+            <div>
+              <p>{error}</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ function Nav() {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light px-2 sticky-top">
+    <nav className="navbar navbar-expand-sm navbar-light bg-light px-2 fixed-top">
       <a className="navbar-brand" href="#">
         Klover Healthcare
       </a>

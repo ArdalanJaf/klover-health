@@ -93,8 +93,9 @@ function AdminTimeslots() {
       <div className="mb-4">
         <h2>Weekly Timeslots</h2>
         <p>
-          Below shows the weekly timeslots you have made available. To delete
-          one, simply click it!
+          Below shows the weekly timeslots you have made available. <br />
+          All times are saved in GMT/BST time. <br />
+          To delete one, simply click it!
         </p>
         {timeslots.length > 0 ? (
           <ul>
@@ -131,7 +132,7 @@ function AdminTimeslots() {
         <h5>Add new timeslot:</h5>
         <div className="d-flex justify-content-between mb-3">
           <select
-            className="form-control"
+            className="form-control me-1"
             id="day"
             value={localTimeslot.day}
             onChange={(e) => handleSelect(e)}
@@ -144,7 +145,7 @@ function AdminTimeslots() {
             ))}
           </select>
           <select
-            className="form-control"
+            className="form-control mx-1"
             id="hour"
             value={localTimeslot.hour}
             onChange={(e) => handleSelect(e)}
@@ -157,7 +158,7 @@ function AdminTimeslots() {
             ))}
           </select>
           <select
-            className="form-control"
+            className="form-control ms-1"
             id="minutes"
             value={localTimeslot.minutes}
             onChange={(e) => {

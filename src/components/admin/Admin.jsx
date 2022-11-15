@@ -67,8 +67,9 @@ const Admin = () => {
         </div>
       </div>
       <div className="container-fluid">
-        <div className="row">
-          <nav className="col-12 col-md-2 d-block bg-light sidebar">
+        {!loggedIn && <AdminLogin setLoggedIn={setLoggedIn} />}
+        <div className={`row ${!loggedIn ? "d-none" : ""}`}>
+          <nav className="col-12 col-md-2 d-block bg-light sidebar px-0">
             <div className="sidebar-sticky">
               <ul className="nav flex-md-column flex-row">
                 <li className="nav-item">
@@ -110,7 +111,6 @@ const Admin = () => {
             role="main"
             className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4"
           >
-            {!loggedIn && <AdminLogin setLoggedIn={setLoggedIn} />}
             {loggedIn && screen === 0 && (
               <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
             )}

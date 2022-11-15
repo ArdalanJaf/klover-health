@@ -7,10 +7,14 @@ import { setAvailableTs, setTimeslotInfo } from "../../redux/adminSlice";
 import AdminExceptions from "./AdminExceptions";
 import AdminValues from "./AdminValues";
 import AdminLogin from "./AdminLogin";
+import { setLogin } from "../../redux/adminSlice";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "./dashboard.css";
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [screen, setScreen] = useState(0);
 
   const getAvailableTimeslots = async () => {
     try {
@@ -34,17 +38,87 @@ const Admin = () => {
     }
   };
 
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    dispatch(setLogin({ userId: "", token: "" }));
+  };
+
   // useEffect(() => {
   //   getAvailableTimeslots();
   //   getTimeslotInfo();
   // }, []);
 
   return (
-    <div className="container">
-      {!loggedIn && <AdminLogin setLoggedIn={setLoggedIn} />}
-      {loggedIn && <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />}
-      {/* {loggedIn && <AdminExceptions />} */}
-      {/* {loggedIn && <AdminValues />} */}
+    <div className="container-max">
+      <div className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a className="navbar-brand ms-2" href="#">
+          Klover Healthcare
+        </a>
+        <div className="navbar-nav px-3">
+          <div className="nav-item text-nowrap">
+            <button
+              className="nav-link btn btn-outline-secondary my-1 px-1"
+              onClick={handleSignOut}
+              disabled={loggedIn ? false : true}
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="container-fluid">
+        <div className="row">
+          <nav className="col-12 col-md-2 d-block bg-light sidebar">
+            <div className="sidebar-sticky">
+              <ul className="nav flex-md-column flex-row">
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${screen === 0 ? "active" : ""}`}
+                    onClick={() => setScreen(0)}
+                  >
+                    Timeslots
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${screen === 1 ? "active" : ""}`}
+                    onClick={() => setScreen(1)}
+                  >
+                    Unavailability
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${screen === 2 ? "active" : ""}`}
+                    onClick={() => setScreen(2)}
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${screen === 3 ? "active" : ""}`}
+                    onClick={() => setScreen(3)}
+                  >
+                    Email
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div
+            role="main"
+            className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4"
+          >
+            {!loggedIn && <AdminLogin setLoggedIn={setLoggedIn} />}
+            {loggedIn && screen === 0 && (
+              <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
+            )}
+            {loggedIn && screen === 1 && <AdminExceptions />}
+            {/* {loggedIn && <AdminValues />} */}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

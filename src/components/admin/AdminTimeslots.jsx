@@ -90,11 +90,11 @@ function AdminTimeslots() {
 
   return (
     <div>
-      <div>
-        <h3>Weekly Timeslots:</h3>
+      <div className="mb-4">
+        <h2>Weekly Timeslots</h2>
         <p>
-          Below shows the timeslots you have made available. To delete one,
-          simply click it!
+          Below shows the weekly timeslots you have made available. To delete
+          one, simply click it!
         </p>
         {timeslots.length > 0 ? (
           <ul>
@@ -120,68 +120,75 @@ function AdminTimeslots() {
             })}
           </ul>
         ) : (
-          <p>
-            Warning: You have not made any available timeslots, so customers
-            cannot book any sessons!
-          </p>
+          <div className="alert alert-warning">
+            Warning: You have no timeslots, so customers are not able select any
+            times and make a booking!
+          </div>
         )}
       </div>
 
       <div>
         <h5>Add new timeslot:</h5>
-        <select
-          id="day"
-          value={localTimeslot.day}
-          onChange={(e) => handleSelect(e)}
-        >
-          <option>Day</option>
-          {days.map((day, i) => (
-            <option key={i} value={i}>
-              {day}
-            </option>
-          ))}
-        </select>
-        <select
-          id="hour"
-          value={localTimeslot.hour}
-          onChange={(e) => handleSelect(e)}
-        >
-          <option>Hour</option>
-          {hour.map((num, i) => (
-            <option key={i} value={num}>
-              {makeDoubleDigitStr(num)}
-            </option>
-          ))}
-        </select>
-        <select
-          id="minutes"
-          value={localTimeslot.minutes}
-          onChange={(e) => {
-            handleSelect(e);
-          }}
-        >
-          <option>Minute</option>
-          {minutes.map((num, i) => (
-            <option key={i} value={num}>
-              {makeDoubleDigitStr(num)}
-            </option>
-          ))}
-        </select>
-
-        <button
-          type="submit"
-          disabled={
-            localTimeslot.day && localTimeslot.hour && localTimeslot.minutes
-              ? false
-              : true
-          }
-          onClick={(e) => {
-            e.preventDefault();
-            addTimeslot({ timeslot: localTimeslot });
-          }}
-        >
-          Submit
-        </button>
+        <div className="d-flex justify-content-between mb-3">
+          <select
+            className="form-control"
+            id="day"
+            value={localTimeslot.day}
+            onChange={(e) => handleSelect(e)}
+          >
+            <option value="">Day</option>
+            {days.map((day, i) => (
+              <option key={i} value={i}>
+                {day}
+              </option>
+            ))}
+          </select>
+          <select
+            className="form-control"
+            id="hour"
+            value={localTimeslot.hour}
+            onChange={(e) => handleSelect(e)}
+          >
+            <option value="">Hour</option>
+            {hour.map((num, i) => (
+              <option key={i} value={num}>
+                {makeDoubleDigitStr(num)}
+              </option>
+            ))}
+          </select>
+          <select
+            className="form-control"
+            id="minutes"
+            value={localTimeslot.minutes}
+            onChange={(e) => {
+              handleSelect(e);
+            }}
+          >
+            <option value="">Minute</option>
+            {minutes.map((num, i) => (
+              <option key={i} value={num}>
+                {makeDoubleDigitStr(num)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="text-center">
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={
+              localTimeslot.day && localTimeslot.hour && localTimeslot.minutes
+                ? false
+                : true
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              addTimeslot({ timeslot: localTimeslot });
+            }}
+          >
+            Submit
+          </button>
+        </div>
       </div>
 
       {/* <button

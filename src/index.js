@@ -6,6 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "./components/custom.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import "./index.css";
 

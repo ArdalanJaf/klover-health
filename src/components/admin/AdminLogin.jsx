@@ -25,12 +25,12 @@ const AdminLogin = ({ setLoggedIn }) => {
           setLogin({ userId: results.data.userId, token: results.data.token })
         );
         setLoggedIn(true);
-      } else if ((results.data.status = 2)) {
+      } else {
         setError(results.data.error);
       }
       console.log(results.data);
     } catch (error) {
-      alert("API down " + error);
+      setError(error);
     }
   };
 

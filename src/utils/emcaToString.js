@@ -12,6 +12,7 @@ const emcaToString = (emcaInt) => {
   let month = dateObj.getMonth();
   let year = dateObj.getFullYear();
 
+  return dateObj.toUTCString();
   return toUTCTimeZone(dateObj).toDateString();
   // return day + hours + minutes + date + month + year;
 };

@@ -13,8 +13,14 @@ export const adminSlice = createSlice({
     },
     availableTs: [], // [EMCAInt, EMCAInt, etc]
     timeslots: [], // [{id, day, hour, minutes}]
-    exceptionTs: { dates: [], slots: [] }, // [{id, type, time, date_range_end, }]
+    unavailability: [], // [{id, type, time, date_range_end, }]
     login: { userId: null, token: null },
+    timeslotOptions: {
+      fixedMax: true,
+      noOfWeeks: 0,
+      maxDate: { year: 2023, month: 3, date: 5 },
+      cushionDays: 1,
+    },
   },
   reducers: {
     setPrices: (state, action) => {
@@ -30,8 +36,12 @@ export const adminSlice = createSlice({
     setTimeslotInfo: (state, action) => {
       // console.log(action.payload);
       state.timeslots = action.payload.timeslots;
+      state.timeslotOptions = action.payload.timeslotOptions;
       // split up
-      state.exceptionTs = action.payload.exceptionTs;
+      // state.unavailability = action.payload.unavailability;
+    },
+    setUnavailability: (state, action) => {
+      state.unavailability = action.payload;
     },
     setLogin: (state, action) => {
       state.login.userId = action.payload.userId;
@@ -45,6 +55,7 @@ export const {
   setContact,
   setAvailableTs,
   setTimeslotInfo,
+  setUnavailability,
   setLogin,
 } = adminSlice.actions;
 

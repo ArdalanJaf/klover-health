@@ -44,7 +44,7 @@ function Booking({ productId }) {
               let date = new Date(item);
               // Minimum time in advance people can book? obv not today...
               // do this in back end.
-              return <option key={i} value={item} label={emcaToString(date)} />;
+              return <option key={i} value={item} label={date.toUTCString()} />;
             })}
           </select>
         </div>

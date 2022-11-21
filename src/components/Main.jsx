@@ -20,6 +20,7 @@ function Main() {
   const getAvailableTimeslots = async () => {
     try {
       const results = await axios.get(API_URL + "/admin/timeslots");
+      console.log(results);
       dispatch(setAvailableTs(results.data.availableTs));
     } catch (error) {
       // message to tell user to contact Risha directly
@@ -30,7 +31,7 @@ function Main() {
   const getPrices = async () => {
     try {
       const results = await axios.get(API_URL + "/admin/prices");
-      console.log(results);
+      // console.log(results);
       dispatch(setPrices(results.data.prices));
     } catch (error) {
       console.log("API down " + error);

@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../API/API_URL";
 import { useDispatch } from "react-redux";
 import { setAvailableTs, setTimeslotInfo } from "../../redux/adminSlice";
-import AdminExceptions from "./AdminExceptions";
+import AdminUnavailability from "./AdminUnavailability";
 import AdminValues from "./AdminValues";
 import AdminLogin from "./AdminLogin";
 import { setLogin } from "../../redux/adminSlice";
@@ -13,7 +13,7 @@ import "./dashboard.css";
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [screen, setScreen] = useState(0);
 
   const getAvailableTimeslots = async () => {
@@ -114,7 +114,7 @@ const Admin = () => {
             {loggedIn && screen === 0 && (
               <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
             )}
-            {loggedIn && screen === 1 && <AdminExceptions />}
+            {loggedIn && screen === 1 && <AdminUnavailability />}
             {/* {loggedIn && <AdminValues />} */}
           </div>
         </div>

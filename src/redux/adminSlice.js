@@ -12,19 +12,18 @@ export const adminSlice = createSlice({
       email: "",
     },
     availableTs: [], // [EMCAInt, EMCAInt, etc]
+    login: { userId: null, token: null },
     timeslots: [], // [{id, day, hour, minutes}]
     unavailability: [], // [{id, type, time, date_range_end, }]
-    login: { userId: null, token: null },
     timeslotOptions: {
-      fixedMax: true,
+      fixedMax: "",
       noOfWeeks: 0,
-      maxDate: { year: 2023, month: 3, date: 5 },
-      cushionDays: 1,
+      maxDate: { year: 0, month: 0, date: 0 },
+      cushionDays: 0,
     },
   },
   reducers: {
     setPrices: (state, action) => {
-      // console.log("recieved");
       state.prices = action.payload;
     },
     setContact: (state, action) => {

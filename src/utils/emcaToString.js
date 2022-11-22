@@ -5,12 +5,12 @@ const emcaToString = (emcaInt) => {
   }
 
   let dateObj = new Date(emcaInt);
-  let hours = dateObj.getHours();
-  let minutes = dateObj.getMinutes();
-  let day = dateObj.getDay();
-  let date = dateObj.getDate();
-  let month = dateObj.getMonth();
-  let year = dateObj.getFullYear();
+  // let hours = dateObj.getHours();
+  // let minutes = dateObj.getMinutes();
+  // let day = dateObj.getDay();
+  // let date = dateObj.getDate();
+  // let month = dateObj.getMonth();
+  // let year = dateObj.getFullYear();
 
   return dateObj.toUTCString();
   return toUTCTimeZone(dateObj).toDateString();

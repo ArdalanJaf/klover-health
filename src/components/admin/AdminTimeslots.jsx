@@ -90,18 +90,10 @@ function AdminTimeslots() {
 
   const changeTSOptions = async (payload) => {
     try {
-      let result = await axios.post(
-        API_URL + "/admin/change_ts_options",
-        payload,
-        {
-          headers: { token: token },
-        }
-      );
-      if (result.data.status === 1) {
-        console.log("recieved");
-        getTimeslotInfo();
-      }
-      return console.log("something is wrong");
+      await axios.post(API_URL + "/admin/change_ts_options", payload, {
+        headers: { token: token },
+      });
+      getTimeslotInfo();
     } catch (error) {
       console.log(error);
     }
@@ -119,11 +111,11 @@ function AdminTimeslots() {
           This table shows the weekly timeslots you have made available for
           clients to book appointments. To add a new timeslot, use the "Add New
           Timeslot" form below. To delete a timeslot, simply click it.
-          <div className="alert alert-warning mt-2">
-            {" "}
-            Remember: all times represent UK time (GMT/BST). <br />
-          </div>
         </p>
+        <div className="alert alert-warning mt-2">
+          {" "}
+          Remember: all times represent UK time (GMT/BST). <br />
+        </div>
         {timeslots.length > 0 ? (
           <table className="table">
             <tbody>
@@ -248,7 +240,7 @@ function AdminTimeslots() {
                 })
               }
             />
-            <label className="form-check-label" HTMLfor="flexRadioDefault1">
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
               Generate appointments for {"   "}
               <span>
                 <input
@@ -303,31 +295,32 @@ function AdminTimeslots() {
               }
             />
             <label
-              className="form-check-label"
-              HTMLfor="flexRadioDefault1"
-              id="thisDatePicker"
+              className="form-check-label datePicker"
+              htmlFor="flexRadioDefault1"
             >
               Generate appointments untill {"  "}
-              <DatePicker
-                selected={dateValuesToDate(localTSOptions.maxDate)}
-                onChange={(date) => {
-                  setLocalTSOptions({
-                    ...localTSOptions,
-                    maxDate: dateToDateValues(date),
-                  });
-                }}
-                dateFormat="dd/MM/yyyy"
-                startDate={dateValuesToDate(localTSOptions.maxDate)}
-              />{" "}
-              <i
-                className="bi bi-info-circle"
-                onMouseEnter={() =>
-                  setShowTooltip({ ...showTooltip, maxDate: true })
-                }
-                onMouseLeave={() =>
-                  setShowTooltip({ ...showTooltip, maxDate: false })
-                }
-              ></i>{" "}
+              <div className="d-inline-flex align-items-center">
+                <DatePicker
+                  selected={dateValuesToDate(localTSOptions.maxDate)}
+                  onChange={(date) => {
+                    setLocalTSOptions({
+                      ...localTSOptions,
+                      maxDate: dateToDateValues(date),
+                    });
+                  }}
+                  dateFormat="dd/MM/yyyy"
+                  startDate={dateValuesToDate(localTSOptions.maxDate)}
+                />{" "}
+                <i
+                  className="bi bi-info-circle ms-2"
+                  onMouseEnter={() =>
+                    setShowTooltip({ ...showTooltip, maxDate: true })
+                  }
+                  onMouseLeave={() =>
+                    setShowTooltip({ ...showTooltip, maxDate: false })
+                  }
+                ></i>{" "}
+              </div>
             </label>
           </div>
           {showTooltip.maxDate && (
@@ -384,7 +377,7 @@ function AdminTimeslots() {
             disabled={localTSOptions === timeslotOptions ? true : false}
             onClick={() => changeTSOptions(localTSOptions)}
           >
-            Change Options
+            Update Options
           </button>
         </div>
       </div>

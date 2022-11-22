@@ -35,8 +35,11 @@ const AdminLogin = ({ setLoggedIn }) => {
   };
 
   return (
-    <div className="container d-flex justify-content-center mt-5">
-      <div>
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      id="fullHeight"
+    >
+      <div className="mb-5">
         <div className="mb-3">
           <label>
             Username:{" "}

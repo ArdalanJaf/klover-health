@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setAvailableTs, setTimeslotInfo } from "../../redux/adminSlice";
 import AdminUnavailability from "./AdminUnavailability";
 import AdminValues from "./AdminValues";
+import AdminPricing from "./AdminPricing";
 import AdminLogin from "./AdminLogin";
 import { setLogin } from "../../redux/adminSlice";
 import "bootstrap/dist/js/bootstrap.bundle";
@@ -115,7 +116,7 @@ const Admin = () => {
               <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
             )}
             {loggedIn && screen === 1 && <AdminUnavailability />}
-            {/* {loggedIn && <AdminValues />} */}
+            {loggedIn && screen === 2 && <AdminPricing />}
           </div>
         </div>
       </div>

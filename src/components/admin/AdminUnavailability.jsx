@@ -6,8 +6,6 @@ import { setUnavailability } from "../../redux/adminSlice";
 import emcaToString from "../../utils/emcaToString";
 import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
-
 function AdminUnavailability() {
   const { unavailability } = useSelector((state) => state.admin);
   const token = useSelector((state) => state.admin.login.token);
@@ -21,21 +19,11 @@ function AdminUnavailability() {
       const results = await axios.get(API_URL + "/admin/unavailability", {
         headers: { token: token },
       });
-      console.log(results.data);
       dispatch(setUnavailability(results.data.unavailability));
     } catch (error) {
       alert("API down " + error);
     }
   };
-
-  function prepForAPI(date) {
-    if (!date) return null;
-    let output = {};
-    output.date = date.getDate();
-    output.month = date.getMonth();
-    output.year = date.getFullYear();
-    return output;
-  }
 
   const addUnavailability = async (payload) => {
     try {
@@ -61,16 +49,22 @@ function AdminUnavailability() {
     }
   };
 
-  useEffect(() => {
-    getUnavailability();
-  }, []);
-
-  function toUTCTimeZone(date) {
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-    return date;
+  function prepForAPI(date) {
+    if (!date) return null;
+    let output = {};
+    output.date = date.getDate();
+    output.month = date.getMonth();
+    output.year = date.getFullYear();
+    return output;
   }
 
   const highlights = () => {
+    // takes all unavailability dates and produces array of date objects to be highlighted in datepicker
+    function toUTCTimeZone(date) {
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+      return date;
+    }
+
     let arr = [];
     unavailability.map((date) => {
       if (date.type === 1) {
@@ -127,15 +121,19 @@ function AdminUnavailability() {
     });
   }
 
+  useEffect(() => {
+    getUnavailability();
+  }, []);
+
   return (
-    <div style={{ maxWidth: "600px" }}>
+    <div>
       <h2>Unavailability</h2>
 
       <p>
         Appointment slots will not be generated on date(s) that are added to
         unavailability. Below shows your existing unavailability entires.
-        <br /> To add an entry, use the "Add Unavailability" form. To delete an
-        entry, simply click on it.
+        <br /> To add an entry, use the "Add Unavailability date(s)" form. To
+        delete an entry, simply click on it.
       </p>
       <div className="mb-4">
         {unavailability.length ? (
@@ -171,61 +169,63 @@ function AdminUnavailability() {
       </div>
 
       <div>
-        <h5>Enter new unavailability date(s):</h5>
-        <div className="datePicker datePickerLong d-flex align-items-center">
-          <DatePicker
-            selected={startDate}
-            onChange={(dates) => {
-              const [start, end] = dates;
-              setStartDate(start);
-              setEndDate(end);
-            }}
-            dateFormat="dd/MM/yyyy"
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            // inline
-            highlightDates={highlights()}
-          />
-          <i
-            className="bi bi-info-circle ms-2"
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-          ></i>
-        </div>
-        {showTooltip && (
-          <div className="alert alert-info mt-2">
-            Select a single date to make only one day unavailable. Select two
-            dates to make a range of dates unavailable.
-            <br /> Dates highlighted in green represent existing entries. You
-            cannot enter seperate overlapping entries.
+        <h5>Add unavailability date(s):</h5>
+        <div className="d-flex align-items-center flex-wrap">
+          <div className="datePicker datePickerLong d-flex align-items-center">
+            <DatePicker
+              selected={startDate}
+              onChange={(dates) => {
+                const [start, end] = dates;
+                setStartDate(start);
+                setEndDate(end);
+              }}
+              dateFormat="dd/MM/yyyy"
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              // inline
+              highlightDates={highlights()}
+            />
+            <i
+              className="bi bi-info-circle ms-2"
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            ></i>
           </div>
-        )}
-        <div className="mt-2 text-center" style={{ width: "220px" }}>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={() => {
-              console.log(startDate);
-              addUnavailability({
-                startDate: prepForAPI(startDate),
-                endDate: !endDate
-                  ? null
-                  : startDate.getTime() === endDate.getTime()
-                  ? null
-                  : prepForAPI(endDate),
-              });
-            }}
-            disabled={
-              startDate && searchUForDate(startDate, endDate) === undefined
-                ? false
-                : true
-            }
-          >
-            Add Unavailability
-          </button>
+          {showTooltip && (
+            <div className="alert alert-info mt-2">
+              Select a single date to make only one day unavailable. Select two
+              dates to make a range of dates unavailable.
+              <br /> Dates highlighted in green represent existing entries. You
+              cannot enter seperate overlapping entries.
+            </div>
+          )}
+          <div className="my-2 text-center" style={{ width: "220px" }}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={() => {
+                addUnavailability({
+                  startDate: prepForAPI(startDate),
+                  endDate: !endDate
+                    ? null
+                    : startDate.getTime() === endDate.getTime()
+                    ? null
+                    : prepForAPI(endDate),
+                });
+              }}
+              disabled={
+                startDate && searchUForDate(startDate, endDate) === undefined
+                  ? false
+                  : true
+              }
+            >
+              Add Unavailability
+            </button>
+          </div>
         </div>
       </div>
+      <div style={{ height: "50px" }}></div>
     </div>
   );
 }

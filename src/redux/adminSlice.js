@@ -3,14 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export const adminSlice = createSlice({
   name: "admin",
   initialState: {
-    prices: {
-      preAssessment: 0,
-      assessment: 0,
-    },
-    contact: {
-      phone: "",
-      email: "",
-    },
     availableTs: [], // [EMCAInt, EMCAInt, etc]
     login: { userId: null, token: null },
     timeslots: [], // [{id, day, hour, minutes}]
@@ -21,6 +13,11 @@ export const adminSlice = createSlice({
       maxDate: { year: 0, month: 0, date: 0 },
       cushionDays: 0,
     },
+    prices: {
+      preAssessment: 0,
+      assessment: 0,
+    },
+    contact: "",
   },
   reducers: {
     setPrices: (state, action) => {

@@ -5,12 +5,12 @@ import { API_URL } from "../../API/API_URL";
 import { useDispatch } from "react-redux";
 import { setAvailableTs, setTimeslotInfo } from "../../redux/adminSlice";
 import AdminUnavailability from "./AdminUnavailability";
-import AdminValues from "./AdminValues";
 import AdminPricing from "./AdminPricing";
 import AdminLogin from "./AdminLogin";
 import { setLogin } from "../../redux/adminSlice";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./dashboard.css";
+import AdminEmail from "./AdminEmail";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -112,11 +112,14 @@ const Admin = () => {
             role="main"
             className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4"
           >
-            {loggedIn && screen === 0 && (
-              <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
-            )}
-            {loggedIn && screen === 1 && <AdminUnavailability />}
-            {loggedIn && screen === 2 && <AdminPricing />}
+            <div className="mx-auto mx-md-0" style={{ maxWidth: "600px" }}>
+              {loggedIn && screen === 0 && (
+                <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
+              )}
+              {loggedIn && screen === 1 && <AdminUnavailability />}
+              {loggedIn && screen === 2 && <AdminPricing />}
+              {loggedIn && screen === 3 && <AdminEmail />}
+            </div>
           </div>
         </div>
       </div>

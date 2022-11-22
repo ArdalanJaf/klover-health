@@ -172,3 +172,12 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 48.99px;
   /* padding-top */
 }
+#priceTable td div {
+  justify-content: center;
+}
+
+#priceTable td,
+#priceTable th {
+  padding-left: 4px;
+  padding-right: 4px;
+}

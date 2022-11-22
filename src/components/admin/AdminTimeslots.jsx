@@ -23,6 +23,7 @@ function AdminTimeslots() {
     cushionDays: false,
   });
 
+  // for select options & timeslots table keys
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let hour = [];
   for (let i = 0; i < 24; i++) hour.push(i);
@@ -52,20 +53,6 @@ function AdminTimeslots() {
     return organised;
   };
 
-  const delTimeslot = async (payload) => {
-    console.log("trying", payload);
-    try {
-      let result = await axios.post(API_URL + "/admin/del_timeslot", payload, {
-        headers: { token: token },
-      });
-      result.data.status === 1
-        ? getTimeslotInfo()
-        : console.log("something is wrong");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const addTimeslot = async (payload) => {
     try {
       let result = await axios.post(API_URL + "/admin/add_timeslot", payload, {
@@ -82,10 +69,18 @@ function AdminTimeslots() {
     }
   };
 
-  const handleSelect = (e) => {
-    let copy = { ...localTimeslot };
-    copy[e.target.id] = e.target.value;
-    return setLocalTimeslot(copy);
+  const delTimeslot = async (payload) => {
+    console.log("trying", payload);
+    try {
+      let result = await axios.post(API_URL + "/admin/del_timeslot", payload, {
+        headers: { token: token },
+      });
+      result.data.status === 1
+        ? getTimeslotInfo()
+        : console.log("something is wrong");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const changeTSOptions = async (payload) => {
@@ -99,14 +94,42 @@ function AdminTimeslots() {
     }
   };
 
+  const handleSelect = (e) => {
+    let copy = { ...localTimeslot };
+    copy[e.target.id] = e.target.value;
+    return setLocalTimeslot(copy);
+  };
+
+  function dateValuesToDate(dateValues) {
+    if (dateValues === null) return null;
+    let { date, month, year } = dateValues;
+    let nDate = new Date();
+    nDate.setFullYear(year);
+    nDate.setMonth(month);
+    nDate.setDate(date);
+    nDate.setHours(0);
+    nDate.setMinutes(0);
+    nDate.setSeconds(0);
+    nDate.setMilliseconds(0);
+    return nDate;
+  }
+
+  function dateToDateValues(date) {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      date: date.getDate(),
+    };
+  }
+
   useEffect(() => {
     getTimeslotInfo();
   }, []);
 
   return (
-    <div className="mb-5" style={{ maxWidth: "600px" }}>
+    <div>
       <div className="mb-4 ">
-        <h2>Weekly Timeslots</h2>
+        <h2>Timeslots</h2>
         <p>
           This table shows the weekly timeslots you have made available for
           clients to book appointments. To add a new timeslot, use the "Add New
@@ -381,31 +404,9 @@ function AdminTimeslots() {
           </button>
         </div>
       </div>
-      <div style={{ height: "300px" }}></div>
+      <div style={{ height: "250px" }}></div>
     </div>
   );
 }
 
 export default AdminTimeslots;
-
-function dateValuesToDate(dateValues) {
-  if (dateValues === null) return null;
-  let { date, month, year } = dateValues;
-  let nDate = new Date();
-  nDate.setFullYear(year);
-  nDate.setMonth(month);
-  nDate.setDate(date);
-  nDate.setHours(0);
-  nDate.setMinutes(0);
-  nDate.setSeconds(0);
-  nDate.setMilliseconds(0);
-  return nDate;
-}
-
-function dateToDateValues(date) {
-  return {
-    year: date.getFullYear(),
-    month: date.getMonth(),
-    date: date.getDate(),
-  };
-}

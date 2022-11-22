@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import About from "./About";
-import AdminValues from "./admin/AdminValues";
 import ContactForm from "./ContactForm";
 import Nav from "./Nav";
 import Header from "./Header";

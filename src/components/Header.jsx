@@ -4,11 +4,10 @@ import img from "../assets/panoramic-3094350_1920.jpg";
 
 function Header() {
   return (
-    <div
-      className="container-max position-relative mb-4 overflow-hidden headerContainer"
-      style={{ marginTop: "55.99px" }}
-    >
-      <img src={img} alt="English landscape" className="headerImg" />
+    <div className="container-max position-relative mb-4 overflow-hidden headerContainer">
+      <div className="d-flex justify-content-center w-100">
+        <img src={img} alt="English landscape" className="headerImg" />
+      </div>
 
       <div className="position-absolute top-0 left-0 w-100 h-100 text-center d-flex flex-column justify-content-center">
         <h1

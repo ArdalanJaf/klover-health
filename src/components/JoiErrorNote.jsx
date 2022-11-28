@@ -1,10 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-function JoiErrorNote({ inputName }) {
-  const joiErrors = useSelector((state) => state.contact.joiErrors);
-
-  return <p>{joiErrors[inputName]}</p>;
+function JoiErrorNote({ error }) {
+  return <span className="small text-danger">{error}</span>;
 }
 
 export default JoiErrorNote;

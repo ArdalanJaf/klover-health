@@ -76,19 +76,20 @@ const AdminLogin = ({ setLoggedIn }) => {
           show password
         </label>
         <div className="text-center">
-          <input
+          <button
             className="btn btn-primary"
             type="submit"
             onClick={() => handleSubmit()}
             disabled={username && password ? false : true}
-          />
-
-          {error && (
-            <div>
-              <p>{error}</p>
-            </div>
-          )}
+          >
+            Login
+          </button>
         </div>
+        {error && (
+          <div>
+            <p>{error}</p>
+          </div>
+        )}
       </div>
     </div>
   );

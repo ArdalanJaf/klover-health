@@ -1,0 +1,32 @@
+body #main .btn:not(.longBtn),
+#admin .btn:not(.longBtn),
+body nav button:not(.longBtn) {
+  width: fit-content;
+}
+
+body #main .form-control,
+body #main select,
+#admin .form-control,
+#admin select,
+#admin input:not(.form-check-input) {
+  //   background-color: #f8f9fa !important;
+}
+
+/* needed for payment element popout window */
+nav {
+  z-index: 1;
+}
+
+@media (min-width: 576px) {
+  /* needed for checkout window */
+  .rounded-md {
+    border-radius: 0.375rem !important;
+  }
+
+  /* fix for stripe payment element wrapper */
+  .stripeFormFix {
+    min-width: 479.99px;
+  }
+}
+
+@import "~bootstrap/scss/bootstrap.scss";

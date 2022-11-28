@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AdminTimeslots from "./AdminTimeslots";
 import axios from "axios";
 import { API_URL } from "../../API/API_URL";
@@ -17,40 +17,13 @@ const Admin = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [screen, setScreen] = useState(0);
 
-  const getAvailableTimeslots = async () => {
-    try {
-      const results = await axios.get(API_URL + "/admin/timeslots");
-      //   console.log(results.data);
-      dispatch(setAvailableTs(results.data.availableTs));
-    } catch (error) {
-      // message to tell user to contact Risha directly
-      alert("API down " + error);
-    }
-  };
-
-  const getTimeslotInfo = async () => {
-    try {
-      const results = await axios.get(API_URL + "/admin/timeslots_info");
-      console.log(results.data);
-      dispatch(setTimeslotInfo(results.data.timeslotInfo));
-    } catch (error) {
-      // message to tell user to contact Risha directly
-      alert("API down " + error);
-    }
-  };
-
   const handleSignOut = () => {
     setLoggedIn(false);
     dispatch(setLogin({ userId: "", token: "" }));
   };
 
-  // useEffect(() => {
-  //   getAvailableTimeslots();
-  //   getTimeslotInfo();
-  // }, []);
-
   return (
-    <div className="container-max">
+    <div className="container-max" id="admin">
       <div className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a className="navbar-brand ms-2" href="#">
           Klover Healthcare
@@ -113,9 +86,7 @@ const Admin = () => {
             className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4"
           >
             <div className="mx-auto mx-md-0" style={{ maxWidth: "600px" }}>
-              {loggedIn && screen === 0 && (
-                <AdminTimeslots getTimeslotInfo={getTimeslotInfo} />
-              )}
+              {loggedIn && screen === 0 && <AdminTimeslots />}
               {loggedIn && screen === 1 && <AdminUnavailability />}
               {loggedIn && screen === 2 && <AdminPricing />}
               {loggedIn && screen === 3 && <AdminEmail />}

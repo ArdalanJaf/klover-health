@@ -9,6 +9,7 @@ export const contactSlice = createSlice({
       message: "",
     },
     joiErrors: {},
+    productSelected: "",
   },
   reducers: {
     setFormData: (state, action) => {
@@ -20,10 +21,25 @@ export const contactSlice = createSlice({
     clearJoiErrors: (state) => {
       state.joiErrors = {};
     },
+    clearFormData: (state) => {
+      state.formData = {
+        email: "",
+        name: "",
+        message: "",
+      };
+    },
+    selectProduct: (state, action) => {
+      state.productSelected = action.payload;
+    },
   },
 });
 
-export const { setFormData, setJoiErrors, clearJoiErrors } =
-  contactSlice.actions;
+export const {
+  setFormData,
+  setJoiErrors,
+  clearJoiErrors,
+  clearFormData,
+  selectProduct,
+} = contactSlice.actions;
 
 export default contactSlice.reducer;

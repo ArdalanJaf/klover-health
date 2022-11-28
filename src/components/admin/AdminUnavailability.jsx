@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { API_URL } from "../../API/API_URL";
 import { setUnavailability } from "../../redux/adminSlice";
-import emcaToString from "../../utils/emcaToString";
 import DatePicker from "react-datepicker";
+import formatUTCToString from "../../utils/formatUTCToString";
 
 function AdminUnavailability() {
   const { unavailability } = useSelector((state) => state.admin);
@@ -135,6 +135,9 @@ function AdminUnavailability() {
         <br /> To add an entry, use the "Add Unavailability date(s)" form. To
         delete an entry, simply click on it.
       </p>
+      <div className="alert alert-warning">
+        Remember: all dates represent UK time (GMT/BST).
+      </div>
       <div className="mb-4">
         {unavailability.length ? (
           <div>
@@ -152,9 +155,9 @@ function AdminUnavailability() {
                       value={date.id}
                       onClick={(e) => delUnavailability({ id: e.target.value })}
                     >
-                      {emcaToString(date.time)}
+                      {formatUTCToString(date.time, true)}
                       {date.date_range_end &&
-                        ` - ${emcaToString(date.date_range_end)}`}
+                        ` - ${formatUTCToString(date.date_range_end, true)}`}
                     </button>
                   </li>
                 );
@@ -162,7 +165,7 @@ function AdminUnavailability() {
             </ul>
           </div>
         ) : (
-          <div className="alert alert-warning">
+          <div className="alert alert-info">
             You currently have no unavailability entries.
           </div>
         )}
@@ -192,14 +195,6 @@ function AdminUnavailability() {
               onMouseLeave={() => setShowTooltip(false)}
             ></i>
           </div>
-          {showTooltip && (
-            <div className="alert alert-info mt-2">
-              Select a single date to make only one day unavailable. Select two
-              dates to make a range of dates unavailable.
-              <br /> Dates highlighted in green represent existing entries. You
-              cannot enter seperate overlapping entries.
-            </div>
-          )}
           <div className="my-2 text-center" style={{ width: "220px" }}>
             <button
               type="submit"
@@ -223,6 +218,14 @@ function AdminUnavailability() {
               Add Unavailability
             </button>
           </div>
+          {showTooltip && (
+            <div className="alert alert-info mt-2">
+              Select a single date to make only one day unavailable. Select two
+              dates to make a range of dates unavailable.
+              <br /> Dates highlighted in green represent existing entries. You
+              cannot enter seperate overlapping entries.
+            </div>
+          )}
         </div>
       </div>
       <div style={{ height: "50px" }}></div>

@@ -35,13 +35,10 @@ function AdminTimeslots() {
       const results = await axios.get(API_URL + "/admin/timeslots_info", {
         headers: { token: token },
       });
-      // console.log(results.data);
       dispatch(setTimeslotInfo(results.data.timeslotInfo));
       setLocalTSOptions(results.data.timeslotInfo.timeslotOptions);
     } catch (error) {
-      // message to tell user to contact Risha directly
       console.log(error);
-      alert("API down " + error);
     }
   };
 
@@ -59,7 +56,6 @@ function AdminTimeslots() {
         headers: { token: token },
       });
       if (result.data.status === 1) {
-        console.log("recieved");
         getTimeslotInfo();
         setLocalTimeslot({ day: "", hour: "", minutes: "" });
       }
@@ -70,22 +66,19 @@ function AdminTimeslots() {
   };
 
   const delTimeslot = async (payload) => {
-    console.log("trying", payload);
     try {
-      let result = await axios.post(API_URL + "/admin/del_timeslot", payload, {
+      await axios.post(API_URL + "/admin/del_timeslot", payload, {
         headers: { token: token },
       });
-      result.data.status === 1
-        ? getTimeslotInfo()
-        : console.log("something is wrong");
+      getTimeslotInfo();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const changeTSOptions = async (payload) => {
+  const updateTSOptions = async (payload) => {
     try {
-      await axios.post(API_URL + "/admin/change_ts_options", payload, {
+      await axios.post(API_URL + "/admin/update_ts_options", payload, {
         headers: { token: token },
       });
       getTimeslotInfo();
@@ -137,7 +130,7 @@ function AdminTimeslots() {
         </p>
         <div className="alert alert-warning mt-2">
           {" "}
-          Remember: all times represent UK time (GMT/BST). <br />
+          Remember: all times represent UK time (GMT/BST).{" "}
         </div>
         {timeslots.length > 0 ? (
           <table className="table">
@@ -398,7 +391,7 @@ function AdminTimeslots() {
           <button
             className="btn btn-primary"
             disabled={localTSOptions === timeslotOptions ? true : false}
-            onClick={() => changeTSOptions(localTSOptions)}
+            onClick={() => updateTSOptions(localTSOptions)}
           >
             Update Options
           </button>

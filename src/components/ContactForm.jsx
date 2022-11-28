@@ -6,6 +6,7 @@ import {
   setFormData,
   setJoiErrors,
   clearJoiErrors,
+  clearFormData,
 } from "../redux/contactSlice";
 import JoiErrorNote from "./JoiErrorNote";
 import MsgSentNotification from "./MsgSentNotification";
@@ -20,12 +21,12 @@ function ContactForm() {
   const sendFormData = async (payload) => {
     // console.log(payload);
     try {
-      const result = await axios.post(API_URL + "/contact/", payload);
+      const result = await axios.post(API_URL + "/contact", payload);
 
       // notify user that API is down, advise to email me.
       if (result.data.status === 0) {
         console.log(result);
-        alert("API error: " + result.data.error);
+        console.log("API error: " + result.data.error);
 
         // notify user of errors
       } else if (result.data.joiErrors) {
@@ -35,6 +36,7 @@ function ContactForm() {
         // notify user message recieved
       } else {
         // document.getElementById("contactForm").reset();
+        dispatch(clearFormData());
         setMessageSent(true);
       }
     } catch (error) {
@@ -58,7 +60,7 @@ function ContactForm() {
           <form
             className="contactForm"
             id="contactForm"
-            onInput={(e) => {
+            onChange={(e) => {
               dispatch(
                 setFormData({ label: e.target.id, value: e.target.value })
               );
@@ -71,9 +73,10 @@ function ContactForm() {
               id="name"
               placeholder="Your name"
               className="form-control mb-2"
+              // value={formData.name}
             />
             {joiErrors.name !== undefined && (
-              <JoiErrorNote inputName={"name"} />
+              <JoiErrorNote error={joiErrors.name} />
             )}
             <label hidden htmlFor="name">
               Your name.
@@ -85,8 +88,9 @@ function ContactForm() {
               id="email"
               placeholder="Your email"
               className="form-control mb-2"
+              // value={formData.email}
             />
-            {joiErrors.email && <JoiErrorNote inputName={"email"} />}
+            {joiErrors.email && <JoiErrorNote error={joiErrors.email} />}
             <label hidden htmlFor="email">
               Your email address.
             </label>
@@ -97,6 +101,7 @@ function ContactForm() {
               id="message"
               rows="6"
               placeholder="Your message"
+              // value={formData.message}
             />
             <label hidden htmlFor="message">
               Your message.
@@ -113,6 +118,11 @@ function ContactForm() {
                   sendFormData(formData);
                   dispatch(clearJoiErrors());
                 }}
+                disabled={
+                  formData.name && formData.email && formData.message
+                    ? false
+                    : true
+                }
               >
                 Send
               </button>

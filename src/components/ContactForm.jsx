@@ -9,12 +9,14 @@ import {
   clearContactForm,
 } from "../redux/publicSlice";
 import JoiErrorNote from "./JoiErrorNote";
-import MsgSentNotification from "./MsgSentNotification";
 
 function ContactForm() {
   const contactErrors = useSelector((state) => state.public.contactErrors);
-  const contactForm = useSelector((state) => state.public.contactForm);
+  const { name, email, message } = useSelector(
+    (state) => state.public.contactForm
+  );
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
 
   // Send user-inputs to back-end.
@@ -29,13 +31,11 @@ function ContactForm() {
 
         // notify user of errors
       } else if (result.data.contactErrors) {
-        // console.log(result.data.contactErrors);
         dispatch(setContactErrors(result.data.contactErrors));
-
-        // notify user message recieved
+        setIsLoading(false);
       } else {
-        // document.getElementById("contactForm").reset();
         dispatch(clearContactForm());
+        setIsLoading(false);
         setMessageSent(true);
       }
     } catch (error) {
@@ -56,21 +56,19 @@ function ContactForm() {
           </p>
         </div>
         <div className="col-12 col-md-6 order-md-1">
-          <form
-            className="contactForm"
-            id="contactForm"
-            onChange={(e) => {
-              dispatch(
-                setContactForm({ label: e.target.id, value: e.target.value })
-              );
-            }}
-          >
+          <form className="contactForm" id="contactForm">
             <input
               type="text"
               name="name"
               id="name"
               placeholder="Your name"
               className="form-control mb-2"
+              value={name}
+              onChange={(e) => {
+                dispatch(
+                  setContactForm({ label: e.target.id, value: e.target.value })
+                );
+              }}
             />
             {contactErrors.name !== undefined && (
               <JoiErrorNote error={contactErrors.name} />
@@ -85,6 +83,12 @@ function ContactForm() {
               id="email"
               placeholder="Your email"
               className="form-control mb-2"
+              value={email}
+              onChange={(e) => {
+                dispatch(
+                  setContactForm({ label: e.target.id, value: e.target.value })
+                );
+              }}
             />
             {contactErrors.email && (
               <JoiErrorNote error={contactErrors.email} />
@@ -99,33 +103,45 @@ function ContactForm() {
               id="message"
               rows="6"
               placeholder="Your message"
+              value={message}
+              onChange={(e) => {
+                dispatch(
+                  setContactForm({ label: e.target.id, value: e.target.value })
+                );
+              }}
             />
             <label hidden htmlFor="message">
               Your message.
             </label>
             {contactErrors.message && <JoiErrorNote inputName={"message"} />}
+
             <div className="text-center">
+              {messageSent && (
+                <div className="small text-success">
+                  Your message has been recieved, thank you.
+                </div>
+              )}
+
               <button
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 type="submit"
                 name="submit"
                 onClick={(e) => {
                   e.preventDefault();
+                  setIsLoading(true);
                   setMessageSent(false);
-                  sendContactForm(contactForm);
+                  sendContactForm({ name, email, message });
                   dispatch(clearContactErrors());
                 }}
-                disabled={
-                  contactForm.name && contactForm.email && contactForm.message
-                    ? false
-                    : true
-                }
+                disabled={name && email && message ? false : true}
               >
-                Send
+                {isLoading ? (
+                  <div className="spinner" id="spinner"></div>
+                ) : (
+                  "Send"
+                )}
               </button>
             </div>
-
-            {messageSent && <MsgSentNotification />}
           </form>
         </div>
       </div>

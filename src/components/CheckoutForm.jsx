@@ -4,7 +4,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import "./spinner.css";
+// import "./spinner.css";
 
 export function CheckoutForm() {
   const stripe = useStripe();

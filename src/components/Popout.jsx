@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { selectProduct } from "../redux/contactSlice";
+import { selectProduct } from "../redux/publicSlice";
 
 function Popout({ component }) {
   const dispatch = useDispatch();

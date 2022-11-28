@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { API_URL } from "../../API/API_URL";
-import { setPrices } from "../../redux/adminSlice";
+import { setPrices } from "../../redux/publicSlice";
 import { numToPrice } from "../../utils/numToPrice";
 
 function AdminPricing() {
   const token = useSelector((state) => state.admin.login.token);
   const { assessment, preAssessment } = useSelector(
-    (state) => state.admin.prices
+    (state) => state.public.prices
   );
   const dispatch = useDispatch();
   const [localA, setLocalA] = useState("");

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const adminSlice = createSlice({
   name: "admin",
   initialState: {
-    availableTs: [], // [EMCAInt, EMCAInt, etc]
+    // availableTs: [], // [EMCAInt, EMCAInt, etc]
     login: { userId: null, token: null },
     timeslots: [], // [{id, day, hour, minutes}]
     unavailability: [], // [{id, type, time, date_range_end, }]
@@ -13,22 +13,22 @@ export const adminSlice = createSlice({
       maxDate: { year: 0, month: 0, date: 0 },
       cushionDays: 0,
     },
-    prices: {
-      preAssessment: 0,
-      assessment: 0,
-    },
+    // prices: {
+    //   preAssessment: 0,
+    //   assessment: 0,
+    // },
     contact: "",
   },
   reducers: {
-    setPrices: (state, action) => {
-      state.prices = action.payload;
-    },
+    // setPrices: (state, action) => {
+    //   state.prices = action.payload;
+    // },
     setContact: (state, action) => {
       state.contact = action.payload;
     },
-    setAvailableTs: (state, action) => {
-      state.availableTs = action.payload;
-    },
+    // setAvailableTs: (state, action) => {
+    //   state.availableTs = action.payload;
+    // },
     setTimeslotInfo: (state, action) => {
       // console.log(action.payload);
       state.timeslots = action.payload.timeslots;
@@ -47,9 +47,9 @@ export const adminSlice = createSlice({
 });
 
 export const {
-  setPrices,
+  // setPrices,
   setContact,
-  setAvailableTs,
+  // setAvailableTs,
   setTimeslotInfo,
   setUnavailability,
   setLogin,

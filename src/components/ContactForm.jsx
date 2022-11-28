@@ -3,23 +3,22 @@ import { API_URL } from "../API/API_URL";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setFormData,
-  setJoiErrors,
-  clearJoiErrors,
-  clearFormData,
-} from "../redux/contactSlice";
+  setContactForm,
+  setContactErrors,
+  clearContactErrors,
+  clearContactForm,
+} from "../redux/publicSlice";
 import JoiErrorNote from "./JoiErrorNote";
 import MsgSentNotification from "./MsgSentNotification";
 
 function ContactForm() {
-  const joiErrors = useSelector((state) => state.contact.joiErrors);
-  const formData = useSelector((state) => state.contact.formData);
+  const contactErrors = useSelector((state) => state.public.contactErrors);
+  const contactForm = useSelector((state) => state.public.contactForm);
   const dispatch = useDispatch();
   const [messageSent, setMessageSent] = useState(false);
 
   // Send user-inputs to back-end.
-  const sendFormData = async (payload) => {
-    // console.log(payload);
+  const sendContactForm = async (payload) => {
     try {
       const result = await axios.post(API_URL + "/contact", payload);
 
@@ -29,14 +28,14 @@ function ContactForm() {
         console.log("API error: " + result.data.error);
 
         // notify user of errors
-      } else if (result.data.joiErrors) {
-        // console.log(result.data.joiErrors);
-        dispatch(setJoiErrors(result.data.joiErrors));
+      } else if (result.data.contactErrors) {
+        // console.log(result.data.contactErrors);
+        dispatch(setContactErrors(result.data.contactErrors));
 
         // notify user message recieved
       } else {
         // document.getElementById("contactForm").reset();
-        dispatch(clearFormData());
+        dispatch(clearContactForm());
         setMessageSent(true);
       }
     } catch (error) {
@@ -62,9 +61,8 @@ function ContactForm() {
             id="contactForm"
             onChange={(e) => {
               dispatch(
-                setFormData({ label: e.target.id, value: e.target.value })
+                setContactForm({ label: e.target.id, value: e.target.value })
               );
-              // console.log(formData);
             }}
           >
             <input
@@ -73,10 +71,9 @@ function ContactForm() {
               id="name"
               placeholder="Your name"
               className="form-control mb-2"
-              // value={formData.name}
             />
-            {joiErrors.name !== undefined && (
-              <JoiErrorNote error={joiErrors.name} />
+            {contactErrors.name !== undefined && (
+              <JoiErrorNote error={contactErrors.name} />
             )}
             <label hidden htmlFor="name">
               Your name.
@@ -88,9 +85,10 @@ function ContactForm() {
               id="email"
               placeholder="Your email"
               className="form-control mb-2"
-              // value={formData.email}
             />
-            {joiErrors.email && <JoiErrorNote error={joiErrors.email} />}
+            {contactErrors.email && (
+              <JoiErrorNote error={contactErrors.email} />
+            )}
             <label hidden htmlFor="email">
               Your email address.
             </label>
@@ -101,12 +99,11 @@ function ContactForm() {
               id="message"
               rows="6"
               placeholder="Your message"
-              // value={formData.message}
             />
             <label hidden htmlFor="message">
               Your message.
             </label>
-            {joiErrors.message && <JoiErrorNote inputName={"message"} />}
+            {contactErrors.message && <JoiErrorNote inputName={"message"} />}
             <div className="text-center">
               <button
                 className="btn btn-secondary"
@@ -115,11 +112,11 @@ function ContactForm() {
                 onClick={(e) => {
                   e.preventDefault();
                   setMessageSent(false);
-                  sendFormData(formData);
-                  dispatch(clearJoiErrors());
+                  sendContactForm(contactForm);
+                  dispatch(clearContactErrors());
                 }}
                 disabled={
-                  formData.name && formData.email && formData.message
+                  contactForm.name && contactForm.email && contactForm.message
                     ? false
                     : true
                 }

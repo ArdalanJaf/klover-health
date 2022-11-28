@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectProduct } from "../redux/contactSlice";
-import { setAvailableTs } from "../redux/adminSlice";
+import { selectProduct } from "../redux/publicSlice";
+import { setAvailableTs } from "../redux/publicSlice";
 import axios from "axios";
 import { API_URL } from "../API/API_URL";
 import { loadStripe } from "@stripe/stripe-js";
@@ -18,7 +18,7 @@ const stripePromise = loadStripe(
 );
 
 function Checkout({ productId }) {
-  const { availableTs, prices } = useSelector((state) => state.admin);
+  const { availableTs, prices } = useSelector((state) => state.public);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -126,7 +126,7 @@ function Checkout({ productId }) {
         ></button>
 
         {/* CART */}
-        <div className="col-md-4 order-md-2">
+        <div className="col-md-4 order-md-2 mt-1">
           <div className="d-flex justify-content-between align-items-center mb-3">
             {/* <h4 className="text-mute">Your cart</h4> */}
           </div>

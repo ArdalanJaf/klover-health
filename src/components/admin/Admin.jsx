@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import AdminTimeslots from "./AdminTimeslots";
-import axios from "axios";
-import { API_URL } from "../../API/API_URL";
 import { useDispatch } from "react-redux";
-import { setAvailableTs, setTimeslotInfo } from "../../redux/adminSlice";
 import AdminUnavailability from "./AdminUnavailability";
 import AdminPricing from "./AdminPricing";
 import AdminLogin from "./AdminLogin";

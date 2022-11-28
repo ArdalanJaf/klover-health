@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { numToPrice } from "../utils/numToPrice";
 import { useSelector, useDispatch } from "react-redux";
-import { selectProduct } from "../redux/contactSlice";
-import Booking from "./Booking";
-import Stripe from "./Stripe";
+import { selectProduct, setPrices } from "../redux/publicSlice";
 import Checkout from "./Checkout";
-import { URL } from "../API/URL";
 import Popout from "./Popout";
 import axios from "axios";
 import { API_URL } from "../API/API_URL";
-import { setPrices } from "../redux/adminSlice";
 
 function Products() {
-  const { prices } = useSelector((state) => state.admin);
-  const { productSelected } = useSelector((state) => state.contact);
+  const { productSelected, prices } = useSelector((state) => state.public);
   const dispatch = useDispatch();
-  // const [product, setProduct] = useState("");
 
   const getPrices = async () => {
     try {
       const results = await axios.get(API_URL + "/admin/prices");
-      // console.log(results);
       dispatch(setPrices(results.data.prices));
     } catch (error) {
       console.log("API down " + error);

@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../API/API_URL";
 import { setPrices } from "../../redux/publicSlice";
 import { numToPrice } from "../../utils/numToPrice";
+import { priceToNum } from "../../utils/priceToNum";
 
 function AdminPricing() {
   const token = useSelector((state) => state.admin.login.token);
@@ -39,22 +40,10 @@ function AdminPricing() {
   const handleSubmit = () => {
     // SQL query always changes both prices, if only one price is changed fetch current price for other.
     updatePrices({
-      assessment: localA !== "" ? formatPriceInput(localA) : assessment,
-      preAssessment: localPA !== "" ? formatPriceInput(localPA) : preAssessment,
+      assessment: localA !== "" ? priceToNum(localA) : assessment,
+      preAssessment: localPA !== "" ? priceToNum(localPA) : preAssessment,
     });
   };
-
-  function formatPriceInput(input) {
-    // turns user input into SQL friendly value. eg. 300.50 => 30050
-    if (!input.toString().includes(".")) return input * 100;
-    let noDot = input.toString().split("");
-    let wDot = noDot.slice(noDot.indexOf("."), noDot.length);
-    noDot = noDot.splice(0, noDot.indexOf("."));
-    wDot.shift();
-    wDot = wDot.splice(0, 2);
-    for (let i = 0; i < 2; i++) if (!wDot[i]) wDot.push("0");
-    return Number(noDot.join("") + wDot.join(""));
-  }
 
   useEffect(() => {
     getPrices();

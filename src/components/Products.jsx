@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { numToPrice } from "../utils/numToPrice";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProduct, setPrices } from "../redux/publicSlice";
-import Checkout from "./Checkout";
+import Booking from "./Booking";
 import Popout from "./Popout";
 import axios from "axios";
 import { API_URL } from "../API/API_URL";
@@ -25,7 +25,7 @@ function Products() {
   }, []);
 
   return (
-    <div id="products" className="pb-5">
+    <div className="pb-5">
       <div className="pb-3">
         <h3>Full Assessment</h3>
         <h4>£{numToPrice(prices.assessment)}</h4>
@@ -47,7 +47,7 @@ function Products() {
         </div>
 
         {productSelected === 1 && (
-          <Popout component={<Checkout productId={1} />} />
+          <Popout component={<Booking productId={1} />} />
         )}
       </div>
       <div>
@@ -70,7 +70,7 @@ function Products() {
         </div>
 
         {productSelected === 2 && (
-          <Popout component={<Checkout productId={2} />} />
+          <Popout component={<Booking productId={2} />} />
         )}
       </div>
     </div>

@@ -4,9 +4,10 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { URL } from "../API/URL";
 // import "./spinner.css";
 
-export function CheckoutForm() {
+export function StripePaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -57,7 +58,7 @@ export function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/success",
+        return_url: `${URL}/success`,
       },
     });
 
@@ -87,7 +88,7 @@ export function CheckoutForm() {
 
       {/* Show any error or success messages */}
       {message && (
-        <small className="text-danger " id="payment-message">
+        <small className="text-danger" id="payment-message">
           {message}
         </small>
       )}
@@ -109,4 +110,4 @@ export function CheckoutForm() {
   );
 }
 
-export default CheckoutForm;
+export default StripePaymentForm;

@@ -4,9 +4,10 @@ import { useDispatch } from "react-redux";
 import AdminUnavailability from "./AdminUnavailability";
 import AdminPricing from "./AdminPricing";
 import AdminLogin from "./AdminLogin";
+import AdminPaymentLink from "./AdminPaymentLink";
 import { setLogin } from "../../redux/adminSlice";
 import "bootstrap/dist/js/bootstrap.bundle";
-import "./dashboard.css";
+import "../../styles/dashboard.css";
 import AdminEmail from "./AdminEmail";
 
 const Admin = () => {
@@ -75,6 +76,14 @@ const Admin = () => {
                     Email
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${screen === 4 ? "active" : ""}`}
+                    onClick={() => setScreen(4)}
+                  >
+                    Payment Link
+                  </a>
+                </li>
               </ul>
             </div>
           </nav>
@@ -87,6 +96,7 @@ const Admin = () => {
               {loggedIn && screen === 1 && <AdminUnavailability />}
               {loggedIn && screen === 2 && <AdminPricing />}
               {loggedIn && screen === 3 && <AdminEmail />}
+              {loggedIn && screen === 4 && <AdminPaymentLink />}
             </div>
           </div>
         </div>

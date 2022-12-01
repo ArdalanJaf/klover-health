@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="pb-5" id="about">
+    <div className="pb-5">
       <h2>Specialised assessments</h2>
       <p>
         Get a mental health assessments in the primary care setting – this means

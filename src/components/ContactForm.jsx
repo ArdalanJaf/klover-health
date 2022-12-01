@@ -44,7 +44,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="container">
+    <div className="container" id="contact">
       <h2 className="text-center">Get In Touch</h2>
       <div className="row">
         <div className="col-12 col-md-6 order-md-2 text-center">

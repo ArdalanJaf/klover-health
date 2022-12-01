@@ -40,7 +40,7 @@ function Nav() {
             <a className="nav-link nav-item" href={URL + "/#about"}>
               About
             </a>
-            <a className="nav-link" href={URL + "/#products"}>
+            <a className="nav-link" href={URL + "/#bookings"}>
               Bookings
             </a>
             <a className="nav-link nav-item " href={URL + "/#contact"}>

@@ -29,4 +29,13 @@ nav {
   }
 }
 
+@media (max-width: 576px) {
+  .maxHeightOnPhone {
+    height: 100vh;
+  }
+  .maxWidthOnPhone {
+    width: 100%;
+  }
+}
+
 @import "~bootstrap/scss/bootstrap.scss";

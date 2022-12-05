@@ -131,7 +131,7 @@ function AdminUnavailability() {
 
       <p>
         Appointment slots will not be generated on date(s) that are added to
-        unavailability. Below shows your existing unavailability entires.
+        unavailability. Below shows your existing unavailability entries.
         <br /> To add an entry, use the "Add Unavailability date(s)" form. To
         delete an entry, simply click on it.
       </p>

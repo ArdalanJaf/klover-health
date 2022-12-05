@@ -11,8 +11,8 @@ import Footer from "./Footer";
 import Spacer from "./Spacer";
 
 function Main({ bookingMade }) {
+  // for successful payment url
   const [booked, setBooked] = useState(false);
-
   useEffect(() => {
     if (bookingMade) setBooked(true);
   }, []);

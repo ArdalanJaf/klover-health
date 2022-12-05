@@ -1,3 +1,11 @@
+@import "./raleway.css";
+@import "./roboto.css";
+
+body {
+  // font-family: "Roboto", sans-serif !important;
+  font-family: "raleway", sans-serif !important;
+}
+
 body #main .btn:not(.longBtn),
 #admin .btn:not(.longBtn),
 body nav button:not(.longBtn) {

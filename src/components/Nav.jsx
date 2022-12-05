@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/js/bootstrap.bundle";
 import { URL } from "../API/URL";
+import kloverIcon from "../assets/kloverIcon.svg";
 
 function Nav() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -9,15 +10,23 @@ function Nav() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-sm navbar-light bg-light px-2 fixed-top"
-        style={{ zIndex: "1" }}
+        className="navbar navbar-expand-sm navbar-light bg-light ps-2 fixed-top"
+        style={{ zIndex: "1", maxHeight: "55.99px" }}
       >
-        <a className="navbar-brand" href={URL}>
+        <a
+          className="navbar-brand fw-bold d-block p-0 d-flex align-items-center"
+          href={URL}
+        >
+          <img
+            src={kloverIcon}
+            style={{ maxHeight: "34px" }}
+            className="me-1"
+          />
           Klover Healthcare
         </a>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler me-2"
           type="button"
           data-toggle="collapse"
           data-target="#navbarToggler"

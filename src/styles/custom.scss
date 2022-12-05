@@ -2,25 +2,15 @@
 @import "./roboto.css";
 
 body {
-  // font-family: "Roboto", sans-serif !important;
-  font-family: "raleway", sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
+  // font-family: "raleway", sans-serif !important;
 }
 
-body #main .btn:not(.longBtn),
-#admin .btn:not(.longBtn),
-body nav button:not(.longBtn) {
-  width: fit-content;
+.numFont {
+  font-family: arial, sans-serif !important;
 }
 
-body #main .form-control,
-body #main select,
-#admin .form-control,
-#admin select,
-#admin input:not(.form-check-input) {
-  //   background-color: #f8f9fa !important;
-}
-
-/* needed for payment element popout window */
+/* needed for booking element popout window */
 nav {
   z-index: 1;
 }
@@ -42,6 +32,10 @@ nav {
     height: 100vh;
   }
   .maxWidthOnPhone {
+    width: 100%;
+  }
+
+  .btn:not(.keepBtnShortOnPhone) {
     width: 100%;
   }
 }

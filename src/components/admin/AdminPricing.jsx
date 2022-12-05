@@ -68,7 +68,7 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0">£{numToPrice(assessment)}</h5>
+                <h5 className="mb-0 numFont">£{numToPrice(assessment)}</h5>
               </div>
             </td>
             <td>
@@ -95,7 +95,7 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0">£{numToPrice(preAssessment)}</h5>
+                <h5 className="mb-0 numFont">£{numToPrice(preAssessment)}</h5>
               </div>
             </td>
             <td>

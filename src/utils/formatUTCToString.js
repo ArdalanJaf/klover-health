@@ -9,7 +9,13 @@ const formatUTCToString = (UTCTime, dateOnly = false, shortForm = false) => {
     month: "long",
     day: "numeric",
   };
-  if (dateOnly) return dateObj.toLocaleDateString("en-UK", dateOptions);
+
+  if (dateOnly) {
+    // for dateOnly, date is artificially changed to match UTC.
+    // this is only because dateOnly is only used in admin Unavailability, where it is critical to display date in UTC (UK) time, rather than local time.
+    dateObj.setMinutes(dateObj.getMinutes() + dateObj.getTimezoneOffset());
+    return dateObj.toLocaleDateString("en-UK", dateOptions);
+  }
 
   let time = `${makeDoubleDigitStr(dateObj.getHours())}:${makeDoubleDigitStr(
     dateObj.getMinutes()

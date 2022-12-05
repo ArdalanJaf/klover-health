@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import AdminTimeslots from "./AdminTimeslots";
 import { useDispatch } from "react-redux";
+import { setLogin } from "../../redux/adminSlice";
+import AdminLogin from "./AdminLogin";
+import AdminTimeslots from "./AdminTimeslots";
 import AdminUnavailability from "./AdminUnavailability";
 import AdminPricing from "./AdminPricing";
-import AdminLogin from "./AdminLogin";
 import AdminPaymentLink from "./AdminPaymentLink";
-import { setLogin } from "../../redux/adminSlice";
+import AdminEmail from "./AdminEmail";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "../../styles/dashboard.css";
-import AdminEmail from "./AdminEmail";
+import kloverIcon from "../../assets/kloverIcon.svg";
+import { URL } from "../../API/URL";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,12 @@ const Admin = () => {
   return (
     <div className="container-max" id="admin">
       <div className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a className="navbar-brand ms-2" href="#">
+        <a className="navbar-brand ms-2 d-flex align-items-center" href={URL}>
+          <img
+            src={kloverIcon}
+            style={{ maxHeight: "34px" }}
+            className="me-1"
+          />{" "}
           Klover Healthcare
         </a>
         <div className="navbar-nav px-3">

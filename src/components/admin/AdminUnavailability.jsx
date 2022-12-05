@@ -25,6 +25,16 @@ function AdminUnavailability() {
     }
   };
 
+  const cleanUnavailability = async () => {
+    try {
+      await axios.delete(API_URL + "/admin/clean-unavailability", {
+        headers: { token: token },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addUnavailability = async (payload) => {
     try {
       await axios.post(API_URL + "/admin/add_unavailability", payload, {
@@ -122,7 +132,15 @@ function AdminUnavailability() {
   }
 
   useEffect(() => {
-    getUnavailability();
+    const getData = async () => {
+      try {
+        await cleanUnavailability();
+        getUnavailability();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
   }, []);
 
   return (
@@ -154,6 +172,7 @@ function AdminUnavailability() {
                       id="hoverDel"
                       value={date.id}
                       onClick={(e) => delUnavailability({ id: e.target.value })}
+                      style={{ width: "100%" }}
                     >
                       {formatUTCToString(date.time, true)}
                       {date.date_range_end &&
@@ -173,8 +192,8 @@ function AdminUnavailability() {
 
       <div>
         <h5>Add unavailability date(s):</h5>
-        <div className="d-flex align-items-center flex-wrap">
-          <div className="datePicker datePickerLong d-flex align-items-center">
+        <div className="d-flex align-items-center flex-column">
+          <div className="datePicker datePickerLong d-flex align-items-center mt-2 mb-3">
             <DatePicker
               selected={startDate}
               onChange={(dates) => {
@@ -186,7 +205,7 @@ function AdminUnavailability() {
               startDate={startDate}
               endDate={endDate}
               selectsRange
-              // inline
+              placeholderText="Click here to select date(s)"
               highlightDates={highlights()}
             />
             <i
@@ -195,29 +214,29 @@ function AdminUnavailability() {
               onMouseLeave={() => setShowTooltip(false)}
             ></i>
           </div>
-          <div className="my-2 text-center" style={{ width: "220px" }}>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={() => {
-                addUnavailability({
-                  startDate: prepForAPI(startDate),
-                  endDate: !endDate
-                    ? null
-                    : startDate.getTime() === endDate.getTime()
-                    ? null
-                    : prepForAPI(endDate),
-                });
-              }}
-              disabled={
-                startDate && searchUForDate(startDate, endDate) === undefined
-                  ? false
-                  : true
-              }
-            >
-              Add Unavailability
-            </button>
-          </div>
+          {/* <div className="my-2 text-center"> */}
+          <button
+            type="submit"
+            className="btn btn-primary me-sm-4"
+            onClick={() => {
+              addUnavailability({
+                startDate: prepForAPI(startDate),
+                endDate: !endDate
+                  ? null
+                  : startDate.getTime() === endDate.getTime()
+                  ? null
+                  : prepForAPI(endDate),
+              });
+            }}
+            disabled={
+              startDate && searchUForDate(startDate, endDate) === undefined
+                ? false
+                : true
+            }
+          >
+            Add Unavailability
+          </button>
+          {/* </div> */}
           {showTooltip && (
             <div className="alert alert-info mt-2">
               Select a single date to make only one day unavailable. Select two

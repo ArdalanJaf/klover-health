@@ -37,7 +37,8 @@ function AdminPaymentLink() {
       <p>
         Create a payment link with a custom amount that can be sent to a client.
         Enter the price you want to charge, press "Generate payment link" and a
-        link will be generated.
+        link will be generated. You will be notified by email when a client has
+        successfully paid.
       </p>
       <div className="alert alert-info">
         Prices are always in pound sterling (£).

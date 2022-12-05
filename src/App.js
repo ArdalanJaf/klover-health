@@ -10,7 +10,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="booked" element={<Main bookingMade={true} />} />
-          {/* <Route path="cancel" element={<p>payment cancelled</p>} />{" "} */}
           <Route path="admin" element={<Admin />} />{" "}
         </Routes>
       </Router>

@@ -146,7 +146,7 @@ function AdminTimeslots() {
                       {arr.map((obj, i) => {
                         return (
                           <button
-                            className="btn btn-sm bg-secondary text-white me-1"
+                            className="btn btn-sm bg-secondary text-white me-1 keepBtnShortOnPhone"
                             id="hoverDel"
                             style={{ cursor: "pointer" }}
                             key={i}

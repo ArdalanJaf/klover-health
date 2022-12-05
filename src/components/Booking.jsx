@@ -46,10 +46,9 @@ function Booking({ productId }) {
   const getAvailableTimeslots = async () => {
     try {
       const results = await axios.get(API_URL + "/admin/timeslots");
-      console.log(results);
       dispatch(setAvailableTs(results.data.availableTs));
     } catch (error) {
-      console.log("API down " + error);
+      console.log("API down ", error);
     }
   };
 

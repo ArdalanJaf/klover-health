@@ -54,6 +54,7 @@ function Booking({ productId }) {
 
   useEffect(() => {
     getAvailableTimeslots();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkCoupon = async (payload) => {

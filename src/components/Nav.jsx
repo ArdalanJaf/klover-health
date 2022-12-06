@@ -21,6 +21,7 @@ function Nav() {
             src={kloverIcon}
             style={{ maxHeight: "34px" }}
             className="me-1"
+            alt="klover healthcare icon"
           />
           Klover Healthcare
         </a>

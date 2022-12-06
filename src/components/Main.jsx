@@ -15,6 +15,7 @@ function Main({ bookingMade }) {
   const [booked, setBooked] = useState(false);
   useEffect(() => {
     if (bookingMade) setBooked(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

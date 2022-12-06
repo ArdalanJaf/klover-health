@@ -76,7 +76,7 @@ function AdminUnavailability() {
     }
 
     let arr = [];
-    unavailability.map((date) => {
+    unavailability.forEach((date) => {
       if (date.type === 1) {
         arr.push(toUTCTimeZone(new Date(date.time)));
       }
@@ -141,6 +141,7 @@ function AdminUnavailability() {
       }
     };
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -47,6 +47,7 @@ function AdminPricing() {
 
   useEffect(() => {
     getPrices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -68,7 +69,7 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0 numFont">£{numToPrice(assessment)}</h5>
+                <h5 className="mb-0 fw-normal">£{numToPrice(assessment)}</h5>
               </div>
             </td>
             <td>
@@ -95,7 +96,7 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0 numFont">£{numToPrice(preAssessment)}</h5>
+                <h5 className="mb-0 fw-normal">£{numToPrice(preAssessment)}</h5>
               </div>
             </td>
             <td>

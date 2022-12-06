@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { numToPrice } from "../utils/numToPrice";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProduct, setPrices } from "../redux/publicSlice";
@@ -22,6 +22,7 @@ function Products() {
 
   useEffect(() => {
     getPrices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -44,7 +44,7 @@ function AdminTimeslots() {
 
   const organiseTsByDay = (aTsObj) => {
     let organised = [[], [], [], [], [], [], []];
-    aTsObj.map((obj) => {
+    aTsObj.forEach((obj) => {
       organised[obj.day].push(obj);
     });
     return organised;
@@ -59,7 +59,6 @@ function AdminTimeslots() {
         getTimeslotInfo();
         setLocalTimeslot({ day: "", hour: "", minutes: "" });
       }
-      return console.log("something is wrong");
     } catch (error) {
       console.log(error);
     }
@@ -117,6 +116,7 @@ function AdminTimeslots() {
 
   useEffect(() => {
     getTimeslotInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

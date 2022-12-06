@@ -30,6 +30,7 @@ const Admin = () => {
             src={kloverIcon}
             style={{ maxHeight: "34px" }}
             className="me-1"
+            alt="klover healthcare logo"
           />{" "}
           Klover Healthcare
         </a>
@@ -52,44 +53,44 @@ const Admin = () => {
             <div className="sidebar-sticky">
               <ul className="nav flex-md-column flex-row">
                 <li className="nav-item">
-                  <a
+                  <span
                     className={`nav-link ${screen === 0 ? "active" : ""}`}
                     onClick={() => setScreen(0)}
                   >
                     Timeslots
-                  </a>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <span
                     className={`nav-link ${screen === 1 ? "active" : ""}`}
                     onClick={() => setScreen(1)}
                   >
                     Unavailability
-                  </a>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <span
                     className={`nav-link ${screen === 2 ? "active" : ""}`}
                     onClick={() => setScreen(2)}
                   >
                     Pricing
-                  </a>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <span
                     className={`nav-link ${screen === 3 ? "active" : ""}`}
                     onClick={() => setScreen(3)}
                   >
                     Email
-                  </a>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <span
                     className={`nav-link ${screen === 4 ? "active" : ""}`}
                     onClick={() => setScreen(4)}
                   >
                     Payment Link
-                  </a>
+                  </span>
                 </li>
               </ul>
             </div>

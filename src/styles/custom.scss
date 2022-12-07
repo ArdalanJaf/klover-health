@@ -2,17 +2,41 @@
 @import "./roboto.css";
 
 body {
-  font-family: "Roboto", sans-serif !important;
-  // font-family: "raleway", sans-serif !important;
+  // font-family: "Roboto", sans-serif !important;
+  font-family: "raleway", sans-serif !important;
 }
 
-.numFont {
-  font-family: arial, sans-serif !important;
+// because raleway-font numbers don't look professional
+.numFont,
+textarea,
+select,
+input {
+  font-family: sans-serif !important;
 }
 
-/* needed for booking element popout window */
-nav {
-  z-index: 1;
+// buttons + links
+$primary: #1cc995;
+.btn:not(.btn-outline-secondary):not(#copyBtn) {
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+a,
+.btn {
+  transition: transform 0.1s ease-in-out;
+}
+
+a:not(.btn):hover {
+  // text-decoration: underline;
+  color: $primary !important;
+}
+
+.btn:hover {
+  transform: scale(0.99);
+}
+
+a:active,
+.btn:active {
+  transform: scale(0.95);
 }
 
 @media (min-width: 576px) {
@@ -27,7 +51,15 @@ nav {
   }
 }
 
+// used for products flex
+@media (min-width: 768px) {
+  .w-md-50 {
+    width: 50%;
+  }
+}
+
 @media (max-width: 576px) {
+  // for success page
   .maxHeightOnPhone {
     height: 100vh;
   }
@@ -35,6 +67,7 @@ nav {
     width: 100%;
   }
 
+  // to keep some buttons short always
   .btn:not(.keepBtnShortOnPhone) {
     width: 100%;
   }

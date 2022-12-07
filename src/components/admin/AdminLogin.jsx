@@ -28,7 +28,7 @@ const AdminLogin = ({ setLoggedIn }) => {
       } else {
         setError(results.data.error);
       }
-      console.log(results.data);
+      // console.log(results.data);
     } catch (error) {
       setError(error);
     }
@@ -36,8 +36,8 @@ const AdminLogin = ({ setLoggedIn }) => {
 
   return (
     <div
-      className="container d-flex justify-content-center align-items-center"
-      id="fullHeight"
+      className="container d-flex justify-content-center align-items-center fullHeight"
+      // id="fullHeight"
     >
       <div className="mb-5">
         <div className="mb-3">
@@ -77,7 +77,7 @@ const AdminLogin = ({ setLoggedIn }) => {
         </label>
         <div className="text-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary shadow"
             type="submit"
             onClick={() => handleSubmit()}
             disabled={username && password ? false : true}

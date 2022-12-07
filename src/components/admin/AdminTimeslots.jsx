@@ -146,7 +146,7 @@ function AdminTimeslots() {
                       {arr.map((obj, i) => {
                         return (
                           <button
-                            className="btn btn-sm bg-secondary text-white me-1 keepBtnShortOnPhone"
+                            className="btn btn-sm bg-secondary text-white me-1 keepBtnShortOnPhone numFont"
                             id="hoverDel"
                             style={{ cursor: "pointer" }}
                             key={i}
@@ -167,7 +167,7 @@ function AdminTimeslots() {
           </table>
         ) : (
           <div className="alert alert-danger">
-            Warning: You have no timeslots, so there are no available
+            Warning: You have no timeslots, so there are currently no available
             appointments for clients to make a booking.
           </div>
         )}
@@ -220,7 +220,7 @@ function AdminTimeslots() {
         </div>
         <div className="text-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary shadow"
             type="submit"
             disabled={
               localTimeslot.day && localTimeslot.hour && localTimeslot.minutes
@@ -389,7 +389,7 @@ function AdminTimeslots() {
 
         <div className="text-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary shadow"
             disabled={localTSOptions === timeslotOptions ? true : false}
             onClick={() => updateTSOptions(localTSOptions)}
           >

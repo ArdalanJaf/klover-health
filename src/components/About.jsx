@@ -2,32 +2,29 @@ import React from "react";
 
 function About() {
   return (
-    <div className="pb-5">
-      <h2>Specialised assessments</h2>
+    <div className="">
+      <h2 className="text-center mb-4">About</h2>
       <p>
-        Get a mental health assessments in the primary care setting – this means
-        that when going to the GP regarding an issue or concern regarding mental
-        health, but feel limited by the time restrictions in place, I can offer
-        a more detailed specialised assessment to provide GPs with a treatment
-        recommendation.
-      </p>
+        I am a Specialty Doctor in Psychiatry with 9 years experience, having
+        worked in General Adult Psychiatry and all of the sub-specialties of
+        psychiatry. For the last three years I have worked for the NHS in a
+        London Borough Crisis Team. Having worked throughout the Global Pandemic
+        from 2020 into 2022, particularly in a heavily under resourced
+        circumstance, I was able to hone my skills in assessing and formulating
+        Mental Health disorders in a pressured environment, and facilitating
+        appropriate care using the most accessible approach.
+      </p>{" "}
       <p>
-        This service is ideal for those that feel they have on-going mental
-        health problems but are able to continue functioning – in the sense that
-        a person can keeping on ticking by but they feel as though there is some
-        lack of clarity regarding their mental health, or options to resolve
-        these.{" "}
+        This project has come about to relieve the pressure primary healthcare
+        and community mental health services are facing in ever-more pressurised
+        times. My pricing is a reflection of my belief that this should not have
+        to be an option for people who should be able to utilise services fully
+        from the NHS, (THIS IS CONFUSING BECAUSE IT IS NOT CHEAP PRICING) but as
+        a means of translating the symptoms of a mental health disorder into a
+        clearer direction for both GPs and CMHTs to be directed from. This
+        service is wholly designed to accelerate access to the most suitable
+        care.
       </p>
-      <p>
-        Please note, though I offer a broad service, I cannot provide formal
-        ADHD assessments or ASD diagnosis, though we can discuss these.
-      </p>
-      <p>
-        *** Please note – should you have thoughts of suicide it is important to
-        contact your Local Mental Health Crisis Service or in a Mental Health
-        Emergency – contact Emergency services
-      </p>
-      <p>Ardo's notes: What ? Why? How? </p>
     </div>
   );
 }

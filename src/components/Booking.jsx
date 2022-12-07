@@ -134,29 +134,29 @@ function Booking({ productId }) {
             <li className="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 className="my-0">
-                  {productId === 2
-                    ? " Mental Health Assessment"
-                    : "Initial Consultation"}
+                  {productId === 1 ? "Full Assessment" : "Initial Consultation"}
                 </h6>
                 {clientSecret && (
                   <small>{formatUTCToString(timeslot, false, true)}</small>
                 )}
               </div>
-              <span className="text-muted">£{numToPrice(price)}</span>
+              <span className="text-muted numFont">£{numToPrice(price)}</span>
             </li>
             {couponDiscount > 0 && (
               <li className="list-group-item d-flex justify-content-between bg-light">
                 <div className="text-success">
                   <h6 className="my-0">Discount code</h6>
                 </div>
-                <span className="text-success">
+                <span className="text-success numFont">
                   -£{numToPrice(couponDiscount)}
                 </span>
               </li>
             )}
             <li className="list-group-item d-flex justify-content-between">
               <span>Total</span>
-              <strong>£{numToPrice(price - couponDiscount)}</strong>
+              <strong className="numFont">
+                £{numToPrice(price - couponDiscount)}
+              </strong>
             </li>
           </ul>
 
@@ -203,7 +203,7 @@ function Booking({ productId }) {
               {/* appointment time */}
               <h4 className="mb-3">Appointment Slot</h4>
               <div className="mb-3">
-                <label htmlFor="timeslot" className="form-label mb-1">
+                <label htmlFor="timeslot" className="form-label mb-1 numFont">
                   Date & time:
                   {!isLocalTimeUKTime() && (
                     <>

@@ -7,6 +7,7 @@ import AdminUnavailability from "./AdminUnavailability";
 import AdminPricing from "./AdminPricing";
 import AdminPaymentLink from "./AdminPaymentLink";
 import AdminEmail from "./AdminEmail";
+import Footer from "../Footer";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "../../styles/dashboard.css";
 import kloverIcon from "../../assets/kloverIcon.svg";
@@ -70,6 +71,14 @@ const Admin = () => {
                 </li>
                 <li className="nav-item">
                   <span
+                    className={`nav-link ${screen === 4 ? "active" : ""}`}
+                    onClick={() => setScreen(4)}
+                  >
+                    Pay-Link
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <span
                     className={`nav-link ${screen === 2 ? "active" : ""}`}
                     onClick={() => setScreen(2)}
                   >
@@ -84,20 +93,12 @@ const Admin = () => {
                     Email
                   </span>
                 </li>
-                <li className="nav-item">
-                  <span
-                    className={`nav-link ${screen === 4 ? "active" : ""}`}
-                    onClick={() => setScreen(4)}
-                  >
-                    Payment Link
-                  </span>
-                </li>
               </ul>
             </div>
           </nav>
           <div
             role="main"
-            className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4"
+            className="ms-md-auto col-12 mt-5 mt-md-0 col-md-10 pt-3 px-4 fullHeight position-relative"
           >
             <div className="mx-auto mx-md-0" style={{ maxWidth: "600px" }}>
               {loggedIn && screen === 0 && <AdminTimeslots />}
@@ -106,6 +107,14 @@ const Admin = () => {
               {loggedIn && screen === 3 && <AdminEmail />}
               {loggedIn && screen === 4 && <AdminPaymentLink />}
             </div>
+            <Footer
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            />
           </div>
         </div>
       </div>

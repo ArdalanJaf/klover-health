@@ -7,6 +7,9 @@ import { priceToNum } from "../../utils/priceToNum";
 function AdminPaymentLink() {
   const token = useSelector((state) => state.admin.login.token);
   const [localPrice, setLocalPrice] = useState("");
+  const [linkPrice, setLinkPrice] = useState("");
+  const [copied, setCopied] = useState(false);
+
   const [url, setUrl] = useState("");
 
   const genPaymentLink = async (payload) => {
@@ -19,6 +22,7 @@ function AdminPaymentLink() {
           headers: { token: token },
         }
       );
+      setLinkPrice(localPrice);
       setUrl(results.data.url);
       setLocalPrice("");
     } catch (error) {
@@ -28,6 +32,8 @@ function AdminPaymentLink() {
 
   const copyToClipboard = (payload) => {
     navigator.clipboard.writeText(payload);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -39,8 +45,8 @@ function AdminPaymentLink() {
         link will be generated. You will be notified by email when a client has
         successfully paid.
       </p>
-      <div className="alert alert-info">
-        Prices are always in pound sterling (£).
+      <div className="alert alert-warning">
+        Remember: prices are always in pound sterling (£).
       </div>
       <div className="d-flex flex-column align-items-center">
         <input
@@ -53,22 +59,46 @@ function AdminPaymentLink() {
           onWheel={(e) => e.target.blur()}
         ></input>
         <button
-          className="btn btn-primary text-center"
+          className="btn btn-primary text-center shadow"
           onClick={() => genPaymentLink({ amount: priceToNum(localPrice) })}
           disabled={localPrice ? false : true}
         >
           Generate payment link
         </button>
         {url.length > 0 && (
-          <div className="border p-4 rounded mt-3">
-            <a href={url}>{url}</a>
-            <button
-              className="btn border ms-3"
-              onClick={() => copyToClipboard(url)}
-            >
-              <i class="bi bi-clipboard "></i>
-            </button>
-          </div>
+          <>
+            <div className="mt-3">
+              <p className="lead mb-0">
+                Payment link for <span className="numFont">£{linkPrice}</span>:
+              </p>
+              <div className="border p-4 rounded ">
+                <div className="position-relative d-inline">
+                  <a href={url}>{url}</a>
+                  <div
+                    className={`position-absolute display-1 fw-bold text-primary ${
+                      copied ? "fadeOut" : ""
+                    }
+                    `}
+                    style={{
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      opacity: 0,
+                    }}
+                  >
+                    COPIED
+                  </div>
+                </div>
+                <button
+                  className="btn border ms-3"
+                  id="copyBtn"
+                  onClick={() => copyToClipboard(url)}
+                >
+                  <i class="bi bi-clipboard "></i>
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </div>

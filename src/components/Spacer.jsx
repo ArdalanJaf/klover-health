@@ -6,8 +6,12 @@ function Spacer({ linkId }) {
   return (
     <div
       id={id}
-      style={{ height: "55.99px", width: "100%" }}
-      className="mb-2"
+      style={{
+        height: "55px",
+        marginBottom: "55px",
+        width: "100%",
+      }}
+      className="border-bottom border-1"
     ></div>
   );
 }

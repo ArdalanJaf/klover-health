@@ -58,7 +58,7 @@ export function StripePaymentForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${URL}/success`,
+        return_url: `${URL}/booked`,
       },
     });
 
@@ -94,7 +94,7 @@ export function StripePaymentForm() {
       )}
 
       <button
-        disabled={isLoading || !stripe || !elements}
+        disabled={!stripe || !elements || isLoading}
         id="submit"
         className="btn btn-primary mt-3 w-100"
       >

@@ -46,8 +46,9 @@ function AdminEmail() {
         "Update Email".
       </p>
       <div className="alert alert-warning">
-        Warning: If your email is incorrect you will not recieve booking
-        confirmations or contact messages. Please double check.
+        Remember: if your email is incorrect you will not recieve booking
+        confirmations or contact messages. Please double check your email
+        address is correct.
       </div>
       <div className="d-flex flex-column align-items-center">
         {contact ? (
@@ -66,7 +67,7 @@ function AdminEmail() {
           name="email"
         ></input>
         <button
-          className="btn btn-primary text-center"
+          className="btn btn-primary text-center shadow"
           onClick={() => updateContact({ email: localContact })}
           disabled={localContact ? false : true}
         >

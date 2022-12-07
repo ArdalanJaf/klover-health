@@ -158,14 +158,14 @@ function AdminUnavailability() {
         Remember: all dates represent UK time (GMT/BST).
       </div>
       <div className="mb-4">
-        {unavailability.length ? (
+        {unavailability.length > 0 ? (
           <div>
             <ul style={{ listStyle: "none", paddingInlineStart: "0" }}>
               {unavailability.map((date, i) => {
                 return (
                   <li key={i}>
                     <button
-                      className={`btn text-white mb-1 ${
+                      className={`btn text-white mb-1 numFont ${
                         startDate && searchUForDate(startDate, endDate) === date
                           ? "bg-custom-highlight"
                           : "bg-secondary"
@@ -216,9 +216,17 @@ function AdminUnavailability() {
             ></i>
           </div>
           {/* <div className="my-2 text-center"> */}
+          {showTooltip && (
+            <div className="alert alert-info mt-2">
+              Select a single date to make only one day unavailable. Select two
+              dates to make a range of dates unavailable.
+              <br /> Dates highlighted in green represent existing entries. You
+              cannot enter seperate overlapping entries.
+            </div>
+          )}
           <button
             type="submit"
-            className="btn btn-primary me-sm-4"
+            className="btn btn-primary me-sm-4 shadow"
             onClick={() => {
               addUnavailability({
                 startDate: prepForAPI(startDate),
@@ -238,17 +246,9 @@ function AdminUnavailability() {
             Add Unavailability
           </button>
           {/* </div> */}
-          {showTooltip && (
-            <div className="alert alert-info mt-2">
-              Select a single date to make only one day unavailable. Select two
-              dates to make a range of dates unavailable.
-              <br /> Dates highlighted in green represent existing entries. You
-              cannot enter seperate overlapping entries.
-            </div>
-          )}
         </div>
       </div>
-      <div style={{ height: "50px" }}></div>
+      <div style={{ height: "150px" }}></div>
     </div>
   );
 }

@@ -26,50 +26,54 @@ function Products() {
   }, []);
 
   return (
-    <div className="pb-5">
-      <div className="pb-3">
-        <h3>Full Assessment</h3>
-        <h4>£{numToPrice(prices.assessment)}</h4>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam
-          quaerat sint recusandae doloribus voluptate accusamus nostrum cum modi
-          est magni? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Autem hic iusto quas minus doloremque nisi debitis quaerat eum
-          aspernatur cupiditate.
-        </p>
+    <div>
+      <h2 className="text-center mb-4">Bookings</h2>
+      <div className="d-md-flex ">
+        <div className="w-md-50 me-md-3 d-flex flex-column mb-5 mb-md-0 text-center">
+          <h4>Full Assessment</h4>
+          <h5 className="text-muted numFont mb-2">
+            £{numToPrice(prices.assessment)}
+          </h5>
+          <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
+            The assessment consists of an hour consultation in person or online,
+            depending on what is most comfortable for you. From this assessment
+            a comprehensive report will be written, with NHS procedures in mind,
+            to get you the care you need.
+          </p>
 
-        <div className="text-center py-2">
-          <button
-            className="btn btn-primary"
-            onClick={() => dispatch(selectProduct(1))}
-          >
-            Book Full Assessment
-          </button>{" "}
+          <div className="text-center py-2">
+            <button
+              className="btn btn-primary shadow"
+              onClick={() => dispatch(selectProduct(1))}
+            >
+              Book Full Assessment
+            </button>{" "}
+          </div>
         </div>
-
         {productSelected === 1 && (
           <Popout component={<Booking productId={1} />} />
         )}
-      </div>
-      <div>
-        <h3>Initial Consultation</h3>
-        <h4>£{numToPrice(prices.preAssessment)}</h4>
-        <p>
-          Not sure if this is right for you? No problem! Book a 30 minutes
-          consultation call to find out. If you choose to go forward with an
-          assessment the price of this consultation will be deducted from the
-          total price.
-        </p>
+        <div className="w-md-50 ps-md-3 d-flex flex-column text-center">
+          <h4>Initial Consultation</h4>
+          <h5 className="text-muted numFont mb-2">
+            £{numToPrice(prices.preAssessment)}
+          </h5>
+          <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
+            Not sure a full assessment will help you? Book a 30 minutes
+            consultation call to find out. If you choose to go forward with a
+            full assessment the price of this consultation will be deducted from
+            the total price.
+          </p>
 
-        <div className="text-center py-2">
-          <button
-            className="btn btn-primary"
-            onClick={() => dispatch(selectProduct(2))}
-          >
-            Book Initial Consultation
-          </button>
+          <div className="text-center py-2">
+            <button
+              className="btn btn-primary shadow "
+              onClick={() => dispatch(selectProduct(2))}
+            >
+              Book Initial Consultation
+            </button>
+          </div>
         </div>
-
         {productSelected === 2 && (
           <Popout component={<Booking productId={2} />} />
         )}

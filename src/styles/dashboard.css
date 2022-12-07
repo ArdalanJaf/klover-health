@@ -155,12 +155,12 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 220px;
 }
 
-i {
+#copyBtn {
   cursor: pointer;
   transition: color 0.05s ease-in-out;
 }
 
-i:hover {
+#copyBtn:hover {
   color: #17a2b8;
 }
 
@@ -183,8 +183,8 @@ i:hover {
 }
 
 /*full height minus header */
-#fullHeight {
-  height: calc(100vh - 48px);
+.fullHeight {
+  min-height: calc(100vh - 48px);
 }
 
 #priceTable td div,
@@ -201,4 +201,24 @@ i:hover {
 #priceTable th {
   padding-left: 4px;
   padding-right: 4px;
+}
+
+/* copied to clipboard animation */
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

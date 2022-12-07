@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import About from "./About";
-import ContactForm from "./ContactForm";
-import AboutRicha from "./AboutRicha";
 import Nav from "./Nav";
 import Header from "./Header";
+import Spacer from "./Spacer";
+import Info from "./Info";
 import Products from "./Products";
+import About from "./About";
+import ContactForm from "./ContactForm";
+import Footer from "./Footer";
 import Popout from "./Popout";
 import Success from "./Success";
-import Footer from "./Footer";
-import Spacer from "./Spacer";
 
 function Main({ bookingMade }) {
   // for successful payment url
   const [booked, setBooked] = useState(false);
+
   useEffect(() => {
     if (bookingMade) setBooked(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,12 +25,12 @@ function Main({ bookingMade }) {
       <Nav />
       <Header />
       <div className="container" style={{ maxWidth: "800px" }}>
-        <Spacer linkId="about" />
-        <About />
+        <Spacer linkId="info" />
+        <Info />
         <Spacer linkId="bookings" />
         <Products />
-        <Spacer />
-        <AboutRicha />
+        <Spacer linkId="about" />
+        <About />
         <Spacer linkId="contact" />
         <ContactForm />
         <Footer />

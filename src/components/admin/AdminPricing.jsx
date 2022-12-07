@@ -69,7 +69,9 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0 fw-normal">£{numToPrice(assessment)}</h5>
+                <h5 className="mb-0 fw-normal numFont">
+                  £{numToPrice(assessment)}
+                </h5>
               </div>
             </td>
             <td>
@@ -96,7 +98,9 @@ function AdminPricing() {
             </th>
             <td>
               <div>
-                <h5 className="mb-0 fw-normal">£{numToPrice(preAssessment)}</h5>
+                <h5 className="mb-0 fw-normal numFont">
+                  £{numToPrice(preAssessment)}
+                </h5>
               </div>
             </td>
             <td>
@@ -118,7 +122,7 @@ function AdminPricing() {
 
       <div className="text-center">
         <button
-          className="btn btn-primary"
+          className="btn btn-primary shadow"
           onClick={() => handleSubmit()}
           disabled={!localA && !localPA ? true : false}
         >

@@ -10,11 +10,15 @@ function Nav() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-sm navbar-light bg-light ps-2 fixed-top"
-        style={{ zIndex: "1", maxHeight: "55.99px" }}
+        className="navbar navbar-expand-sm navbar-light bg-light bg-gradient fixed-top"
+        style={{
+          zIndex: "1",
+          maxHeight: "55.99px",
+          boxShadow: "inset 0 -1px 0 rgb(0 0 0 / 10%)",
+        }}
       >
         <a
-          className="navbar-brand fw-bold d-block p-0 d-flex align-items-center"
+          className="navbar-brand fw-bold d-block p-0 d-flex align-items-center ms-2"
           href={URL}
         >
           <img
@@ -40,20 +44,28 @@ function Nav() {
         </button>
 
         <div
-          className={`${isNavCollapsed ? "collapse " : ""} navbar-collapse`}
+          className={`${
+            isNavCollapsed ? "collapse " : ""
+          } navbar-collapse w-100`}
           id="navbarToggler"
         >
           <div
-            className="navbar-nav mr-auto mt-1 justify-content-end"
+            className="navbar-nav mr-auto mt-1 justify-content-end bg-light px-2 text-center"
             style={{ flex: "1" }}
           >
-            <a className="nav-link nav-item" href={URL + "/#about"}>
-              About
+            <a className="nav-link nav-item text-dark" href={URL + "/#info"}>
+              Info
             </a>
-            <a className="nav-link" href={URL + "/#bookings"}>
+            <a
+              className="nav-link nav-item text-dark"
+              href={URL + "/#bookings"}
+            >
               Bookings
             </a>
-            <a className="nav-link nav-item " href={URL + "/#contact"}>
+            <a className="nav-link nav-item text-dark" href={URL + "/#about"}>
+              About
+            </a>
+            <a className="nav-link nav-item text-dark" href={URL + "/#contact"}>
               Contact
             </a>
           </div>

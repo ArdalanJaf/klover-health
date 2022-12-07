@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { API_URL } from "../API/API_URL";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,29 +23,40 @@ function ContactForm() {
   const sendContactForm = async (payload) => {
     try {
       const result = await axios.post(API_URL + "/contact", payload);
-
+      console.log(result.data);
       // notify user that API is down, advise to email me.
       if (result.data.status === 0) {
-        console.log(result);
         console.log("API error: " + result.data.error);
 
-        // notify user of errors
+        // notify user of validation errors
       } else if (result.data.contactErrors) {
         dispatch(setContactErrors(result.data.contactErrors));
         setIsLoading(false);
       } else {
+        // reset form and notify user message has been sent
         dispatch(clearContactForm());
         setIsLoading(false);
         setMessageSent(true);
       }
     } catch (error) {
-      alert("API down " + error);
+      console.log("API down " + error);
     }
   };
 
+  // remove message sent confirmation if user uses form again
+  useEffect(() => {
+    if (
+      messageSent === true &&
+      (name.length > 0 || email.length > 0 || message.length > 0)
+    ) {
+      setMessageSent(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email, name, message]);
+
   return (
-    <div className="container" id="contact">
-      <h2 className="text-center">Get In Touch</h2>
+    <div className="container mb-5 pb-5" id="contact">
+      <h2 className="text-center mb-4">Get In Touch</h2>
       <div className="row">
         <div className="col-12 col-md-6 order-md-2 text-center">
           <p>
@@ -62,7 +73,7 @@ function ContactForm() {
               name="name"
               id="name"
               placeholder="Your name"
-              className="form-control mb-2"
+              className="form-control"
               value={name}
               onChange={(e) => {
                 dispatch(
@@ -82,7 +93,7 @@ function ContactForm() {
               name="email"
               id="email"
               placeholder="Your email"
-              className="form-control mb-2"
+              className="form-control mt-2"
               value={email}
               onChange={(e) => {
                 dispatch(
@@ -98,7 +109,7 @@ function ContactForm() {
             </label>
 
             <textarea
-              className="textbox form-control mb-2"
+              className="textbox form-control mt-2"
               name="message"
               id="message"
               rows="6"
@@ -113,9 +124,11 @@ function ContactForm() {
             <label hidden htmlFor="message">
               Your message.
             </label>
-            {contactErrors.message && <JoiErrorNote inputName={"message"} />}
+            {contactErrors.message && (
+              <JoiErrorNote error={contactErrors.message} />
+            )}
 
-            <div className="text-center">
+            <div className="text-center mt-2">
               {messageSent && (
                 <div className="small text-success">
                   Your message has been recieved, thank you.
@@ -123,7 +136,7 @@ function ContactForm() {
               )}
 
               <button
-                className="btn btn-primary"
+                className="btn btn-primary shadow"
                 type="submit"
                 name="submit"
                 onClick={(e) => {

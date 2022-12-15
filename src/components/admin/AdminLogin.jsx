@@ -3,22 +3,26 @@ import axios from "axios";
 import { API_URL } from "../../API/API_URL";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/adminSlice";
+import { Orbit } from "@uiball/loaders";
 
 const AdminLogin = ({ setLoggedIn }) => {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState("klover_admin");
-  const [password, setPassword] = useState("RichaLovesKlover88");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // DEMO
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     setError("");
+    setIsLoading(true);
     try {
       const results = await axios.post(API_URL + "/admin/login", {
         username: username,
         password: password,
       });
-
+      setIsLoading(false);
       // if username/password correct: save id + token in state, show admin page
       if (results.data.status === 1) {
         dispatch(
@@ -82,7 +86,13 @@ const AdminLogin = ({ setLoggedIn }) => {
             onClick={() => handleSubmit()}
             disabled={username && password ? false : true}
           >
-            Login
+            {isLoading ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Orbit size={20} color="#fff" />
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
         {error && (

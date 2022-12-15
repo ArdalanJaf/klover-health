@@ -23,15 +23,9 @@ function Header() {
           style={{ maxWidth: "80%" }}
         >
           Get the NHS mental health support you need.
-          {/* Accelerate your access to NHS mental health support. */}
         </h1>
-        {/* <p
-          className="lead text-white fs-3"
-          style={{ backgroundColor: "rgb(0 0 0 / 10%)" }}
-        >
-          Get an assessment by a fully certified psychiatrist to get NHS mental
-          health assistance faster.
-        </p> */}
+
+        {/* call to action */}
         <div>
           <a
             href="#info"
@@ -43,7 +37,6 @@ function Header() {
             Learn More
           </a>
         </div>
-        {/* call to action */}
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ export const publicSlice = createSlice({
   initialState: {
     availableTs: [], // [UTC time int, UTC time int, etc]
     prices: {
-      preAssessment: 0,
-      assessment: 0,
+      preAssessment: "",
+      assessment: "",
     },
     contactForm: {
       email: "",

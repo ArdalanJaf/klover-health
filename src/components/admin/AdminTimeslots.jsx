@@ -6,6 +6,7 @@ import { setTimeslotInfo } from "../../redux/adminSlice";
 import makeDoubleDigitStr from "../../utils/makeDoubleDigitStr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Orbit } from "@uiball/loaders";
 
 function AdminTimeslots() {
   const token = useSelector((state) => state.admin.login.token);
@@ -22,6 +23,8 @@ function AdminTimeslots() {
     maxDate: false,
     cushionDays: false,
   });
+  const [isLoadingTimeslots, setIsLoadingTimeslots] = useState(false);
+  const [isLoadingOptions, setIsLoadingOptions] = useState(false);
 
   // for select options & timeslots table keys
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -51,10 +54,12 @@ function AdminTimeslots() {
   };
 
   const addTimeslot = async (payload) => {
+    setIsLoadingTimeslots(true);
     try {
       let result = await axios.post(API_URL + "/admin/add_timeslot", payload, {
         headers: { token: token },
       });
+      setIsLoadingTimeslots(false);
       if (result.data.status === 1) {
         getTimeslotInfo();
         setLocalTimeslot({ day: "", hour: "", minutes: "" });
@@ -76,10 +81,12 @@ function AdminTimeslots() {
   };
 
   const updateTSOptions = async (payload) => {
+    setIsLoadingOptions(true);
     try {
       await axios.post(API_URL + "/admin/update_ts_options", payload, {
         headers: { token: token },
       });
+      setIsLoadingOptions(false);
       getTimeslotInfo();
     } catch (error) {
       console.log(error);
@@ -232,7 +239,13 @@ function AdminTimeslots() {
               addTimeslot({ timeslot: localTimeslot });
             }}
           >
-            Add Timeslot
+            {isLoadingTimeslots ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Orbit size={20} color="#fff" />
+              </div>
+            ) : (
+              "Add Timeslot"
+            )}
           </button>
         </div>
       </div>
@@ -393,7 +406,13 @@ function AdminTimeslots() {
             disabled={localTSOptions === timeslotOptions ? true : false}
             onClick={() => updateTSOptions(localTSOptions)}
           >
-            Update Options
+            {isLoadingOptions ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Orbit size={20} color="#fff" />
+              </div>
+            ) : (
+              "Update Options"
+            )}
           </button>
         </div>
       </div>

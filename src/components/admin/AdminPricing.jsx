@@ -5,6 +5,7 @@ import { API_URL } from "../../API/API_URL";
 import { setPrices } from "../../redux/publicSlice";
 import { numToPrice } from "../../utils/numToPrice";
 import { priceToNum } from "../../utils/priceToNum";
+import { Orbit } from "@uiball/loaders";
 
 function AdminPricing() {
   const token = useSelector((state) => state.admin.login.token);
@@ -14,6 +15,7 @@ function AdminPricing() {
   const dispatch = useDispatch();
   const [localA, setLocalA] = useState("");
   const [localPA, setLocalPA] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const getPrices = async () => {
     try {
@@ -25,10 +27,12 @@ function AdminPricing() {
   };
 
   const updatePrices = async (payload) => {
+    setIsLoading(true);
     try {
       await axios.post(API_URL + "/admin/update_prices", payload, {
         headers: { token: token },
       });
+      setIsLoading(false);
       getPrices();
       setLocalA("");
       setLocalPA("");
@@ -126,7 +130,13 @@ function AdminPricing() {
           onClick={() => handleSubmit()}
           disabled={!localA && !localPA ? true : false}
         >
-          Update Prices
+          {isLoading ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Orbit size={20} color="#fff" />
+            </div>
+          ) : (
+            "Update Prices"
+          )}
         </button>
       </div>
     </div>

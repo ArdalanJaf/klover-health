@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="">
+    <div>
       <h2 className="text-center mb-4">About</h2>
       <p>
         I am a Specialty Doctor in Psychiatry with 9 years experience, having
@@ -19,11 +19,15 @@ function About() {
         and community mental health services are facing in ever-more pressurised
         times. My pricing is a reflection of my belief that this should not have
         to be an option for people who should be able to utilise services fully
-        from the NHS, (THIS IS CONFUSING BECAUSE IT IS NOT CHEAP PRICING) but as
-        a means of translating the symptoms of a mental health disorder into a
-        clearer direction for both GPs and CMHTs to be directed from. This
-        service is wholly designed to accelerate access to the most suitable
-        care.
+        from the NHS, but as a means of translating the symptoms of a mental
+        health disorder into a clearer direction for both GPs and CMHTs to be
+        directed from. This service is wholly designed to accelerate access to
+        the most suitable care.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores maxime
+        totam reprehenderit ad impedit molestiae voluptatum libero cum aliquam
+        nemo. Libero, labore. Omnis, mollitia aliquid.
       </p>
     </div>
   );

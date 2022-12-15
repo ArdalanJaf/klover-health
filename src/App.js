@@ -1,18 +1,19 @@
 import React from "react";
 import Main from "./components/Main";
 import Admin from "./components/admin/Admin";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Main />} />
+      <Routes>
+        <Route path="/" element={<Outlet />}>
+          <Route index element={<Main />} />
           <Route path="booked" element={<Main bookingMade={true} />} />
-          <Route path="admin" element={<Admin />} />{" "}
-        </Routes>
-      </Router>
+          <Route path="admin" element={<Admin />} />
+          <Route path="*" element={<p>404 baby</p>} />
+        </Route>
+      </Routes>
     </>
   );
 }

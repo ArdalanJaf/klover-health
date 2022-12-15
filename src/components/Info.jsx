@@ -19,16 +19,23 @@ function Info() {
         these.{" "}
       </p>
       <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quidem
+        sit, assumenda excepturi ad placeat vel eaque asperiores quisquam
+        accusamus vitae impedit ducimus ut soluta quod similique quaerat libero,
+        quo eum error numquam? Sapiente numquam quos, itaque natus magnam
+        officia similique dolore facilis temporibus officiis!
+      </p>
+      <p>
         Please note, though I offer a broad service,{" "}
         <span className="fst-italic">
           I cannot provide formal ADHD assessments or ASD diagnosis, though we
           can discuss these.
         </span>
       </p>
-      <div className="alert alert-danger text-dark">
-        If you are having suicidal thoughts or are in another mental health
-        emergency, contact your Local Mental Health Crisis Service or Emergency
-        Services as soon as possible.
+      <div className="alert alert-danger text-dark fw-bold text-center">
+        If you are having suicidal thoughts or another mental health emergency,
+        contact your Local Mental Health Crisis Service or Emergency Services as
+        soon as possible.
       </div>
     </div>
   );

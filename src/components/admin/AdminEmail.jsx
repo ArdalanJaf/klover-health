@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { API_URL } from "../../API/API_URL";
 import { setContact } from "../../redux/adminSlice";
+import { Orbit } from "@uiball/loaders";
 
 function AdminEmail() {
   const token = useSelector((state) => state.admin.login.token);
   const { contact } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
   const [localContact, setLocalContact] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const getContact = async () => {
     try {
@@ -22,10 +24,12 @@ function AdminEmail() {
   };
 
   const updateContact = async (payload) => {
+    setIsLoading(true);
     try {
       await axios.post(API_URL + "/admin/update_contact", payload, {
         headers: { token: token },
       });
+      setIsLoading(false);
       getContact();
       setLocalContact("");
     } catch (error) {
@@ -71,7 +75,13 @@ function AdminEmail() {
           onClick={() => updateContact({ email: localContact })}
           disabled={localContact ? false : true}
         >
-          Update Email
+          {isLoading ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Orbit size={20} color="#fff" />
+            </div>
+          ) : (
+            "Update Email"
+          )}
         </button>
       </div>
     </div>

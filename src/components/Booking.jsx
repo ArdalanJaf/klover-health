@@ -12,6 +12,7 @@ import StripePaymentForm from "./StripePaymentForm";
 import formatUTCToString from "../utils/formatUTCToString";
 import { numToPrice } from "../utils/numToPrice";
 import isLocalTimeUKTime from "../utils/isLocalTimeUKTime";
+import { Orbit } from "@uiball/loaders";
 
 const stripePromise = loadStripe(
   "pk_test_51LkVjTGLHUbhQyEkySqFAYxPty0Ta0C8FNsBcqxaxQp3IRWMKYnMs8FMKBj2mRTgx1kA1UYLYtVNmq7DyqlNBZ9G00uhBudUDG"
@@ -30,6 +31,7 @@ function Booking({ productId }) {
   const [validationErrors, setValidationErrors] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const price = productId === 1 ? prices.assessment : prices.preAssessment;
 
@@ -77,11 +79,14 @@ function Booking({ productId }) {
   };
 
   const requestPaymentIntent = async (payload) => {
+    setValidationErrors("");
+    setIsLoading(true);
     try {
       const results = await axios.post(
         API_URL + "/stripe/create-payment-intent",
         payload
       );
+      setIsLoading(false);
       if (results.data.validationErrors) {
         setValidationErrors(results.data.validationErrors);
       } else {
@@ -99,8 +104,6 @@ function Booking({ productId }) {
       colorPrimary: "#007bff",
       colorBackground: "rgba(0,0,0,0)",
       fontSizeBase: "1.1rem",
-
-      // spacingUnit: "3",
       spacingGridRow: "1.1rem",
     },
   };
@@ -309,12 +312,17 @@ function Booking({ productId }) {
               <button
                 className="btn btn-primary w-100"
                 onClick={() => {
-                  setValidationErrors("");
                   bookingInfo.couponCode = couponDiscount ? couponCode : "";
                   requestPaymentIntent(bookingInfo);
                 }}
               >
-                Confirm
+                {isLoading ? (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Orbit size={20} color="#fff" />
+                  </div>
+                ) : (
+                  "Confirm"
+                )}
               </button>
               <div className="mx-2">
                 <small>

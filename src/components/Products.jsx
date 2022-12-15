@@ -12,6 +12,7 @@ function Products() {
   const dispatch = useDispatch();
 
   const getPrices = async () => {
+    // console.log("getting prices.. ", URL + "/admin/prices");
     try {
       const results = await axios.get(API_URL + "/admin/prices");
       dispatch(setPrices(results.data.prices));
@@ -31,9 +32,11 @@ function Products() {
       <div className="d-md-flex ">
         <div className="w-md-50 me-md-3 d-flex flex-column mb-5 mb-md-0 text-center">
           <h4>Full Assessment</h4>
-          <h5 className="text-muted numFont mb-2">
-            £{numToPrice(prices.assessment)}
-          </h5>
+          {prices.assessment && (
+            <h5 className="text-muted numFont mb-2">
+              £{numToPrice(prices.assessment)}
+            </h5>
+          )}
           <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
             The assessment consists of an hour consultation in person or online,
             depending on what is most comfortable for you. From this assessment
@@ -55,9 +58,11 @@ function Products() {
         )}
         <div className="w-md-50 ps-md-3 d-flex flex-column text-center">
           <h4>Initial Consultation</h4>
-          <h5 className="text-muted numFont mb-2">
-            £{numToPrice(prices.preAssessment)}
-          </h5>
+          {prices.preAssessment && (
+            <h5 className="text-muted numFont mb-2">
+              £{numToPrice(prices.preAssessment)}
+            </h5>
+          )}
           <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
             Not sure a full assessment will help you? Book a 30 minutes
             consultation call to find out. If you choose to go forward with a

@@ -5,6 +5,7 @@ import { API_URL } from "../../API/API_URL";
 import { setUnavailability } from "../../redux/adminSlice";
 import DatePicker from "react-datepicker";
 import formatUTCToString from "../../utils/formatUTCToString";
+import { Orbit } from "@uiball/loaders";
 
 function AdminUnavailability() {
   const { unavailability } = useSelector((state) => state.admin);
@@ -13,6 +14,7 @@ function AdminUnavailability() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUnavailability = async () => {
     try {
@@ -36,10 +38,12 @@ function AdminUnavailability() {
   };
 
   const addUnavailability = async (payload) => {
+    setIsLoading(true);
     try {
       await axios.post(API_URL + "/admin/add_unavailability", payload, {
         headers: { token: token },
       });
+      setIsLoading(false);
       getUnavailability();
       setStartDate(null);
       setEndDate(null);
@@ -243,7 +247,13 @@ function AdminUnavailability() {
                 : true
             }
           >
-            Add Unavailability
+            {isLoading ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Orbit size={20} color="#fff" />
+              </div>
+            ) : (
+              "Add Unavailability"
+            )}
           </button>
           {/* </div> */}
         </div>

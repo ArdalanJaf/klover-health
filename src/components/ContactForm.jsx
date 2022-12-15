@@ -9,6 +9,7 @@ import {
   clearContactForm,
 } from "../redux/publicSlice";
 import JoiErrorNote from "./JoiErrorNote";
+import { Orbit } from "@uiball/loaders";
 
 function ContactForm() {
   const contactErrors = useSelector((state) => state.public.contactErrors);
@@ -64,6 +65,10 @@ function ContactForm() {
             dolor ullam ut corporis blanditiis, eum reprehenderit incidunt
             dolorum, atque inventore magnam debitis maxime, a veniam porro ex!
             Voluptatum, aperiam.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam,
+            ut.
           </p>
         </div>
         <div className="col-12 col-md-6 order-md-1">
@@ -130,7 +135,7 @@ function ContactForm() {
 
             <div className="text-center mt-2">
               {messageSent && (
-                <div className="small text-success">
+                <div className="small text-success mb-2">
                   Your message has been recieved, thank you.
                 </div>
               )}
@@ -149,7 +154,9 @@ function ContactForm() {
                 disabled={name && email && message ? false : true}
               >
                 {isLoading ? (
-                  <div className="spinner" id="spinner"></div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Orbit size={20} color="#fff" />
+                  </div>
                 ) : (
                   "Send"
                 )}

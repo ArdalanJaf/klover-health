@@ -5,13 +5,14 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { URL } from "../API/URL";
-// import "./spinner.css";
+import { Orbit } from "@uiball/loaders";
 
 export function StripePaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
+  const [haveSubmit, setHaveSubmit] = useState(false); // incase of multiple purchase attempts from same ip
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export function StripePaymentForm() {
       return;
     }
 
+    if (haveSubmit) setHaveSubmit(false);
     setIsLoading(true);
 
     const { error } = await stripe.confirmPayment({
@@ -75,6 +77,7 @@ export function StripePaymentForm() {
       setMessage("An unexpected error occurred.");
     }
 
+    setHaveSubmit(true);
     setIsLoading(false);
   };
 
@@ -87,7 +90,7 @@ export function StripePaymentForm() {
       <PaymentElement id="payment-element" options={paymentElementOptions} />
 
       {/* Show any error or success messages */}
-      {message && (
+      {message && haveSubmit && (
         <small className="text-danger" id="payment-message">
           {message}
         </small>
@@ -98,13 +101,13 @@ export function StripePaymentForm() {
         id="submit"
         className="btn btn-primary mt-3 w-100"
       >
-        <span id="button-text">
-          {isLoading ? (
-            <div className="spinner" id="spinner"></div>
-          ) : (
-            "Complete Booking"
-          )}
-        </span>
+        {isLoading ? (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Orbit size={20} color="#fff" />
+          </div>
+        ) : (
+          "Complete Booking"
+        )}
       </button>
     </form>
   );

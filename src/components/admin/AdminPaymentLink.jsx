@@ -83,29 +83,26 @@ function AdminPaymentLink() {
               <p className="lead mb-0">
                 Payment link for <span className="numFont">£{linkPrice}</span>:
               </p>
-              <div className="border p-4 rounded">
-                <div className="position-relative d-inline">
-                  <a style={{ wordWrap: "break-word" }} href={url}>
-                    {url}
-                  </a>
-
-                  {/* Copy Notification */}
-                  <div
-                    className={`position-absolute display-1 fw-bold text-primary ${
-                      copied ? "fadeOut" : ""
-                    }
+              <div className="border p-4 rounded position-relative">
+                <a style={{ wordWrap: "break-word" }} href={url}>
+                  {url}
+                </a>
+                <div
+                  className={`position-absolute display-1 fw-bold text-primary pe-sm-5 ${
+                    copied ? "fadeOut" : ""
+                  }
                     `}
-                    style={{
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      opacity: 0,
-                      pointerEvents: "none",
-                    }}
-                  >
-                    COPIED
-                  </div>
+                  style={{
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    opacity: 0,
+                    pointerEvents: "none",
+                  }}
+                >
+                  COPIED
                 </div>
+                {/* Copy Notification */}
 
                 {/* Copy Button */}
                 <button

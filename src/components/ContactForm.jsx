@@ -59,16 +59,14 @@ function ContactForm() {
     <div className="container mb-5 pb-5" id="contact">
       <h2 className="text-center mb-4">Get In Touch</h2>
       <div className="row">
-        <div className="col-12 col-md-6 order-md-2 text-center">
+        <div className="col-12 col-md-6 order-md-2 text-center ">
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad labore
-            dolor ullam ut corporis blanditiis, eum reprehenderit incidunt
-            dolorum, atque inventore magnam debitis maxime, a veniam porro ex!
-            Voluptatum, aperiam.
+            Please send a message through this contact form and we will get back
+            to you as soon as possible.
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam,
-            ut.
+            If you are requesting a free pre-assessment phone call, please
+            include your phone number and availability in the message.
           </p>
         </div>
         <div className="col-12 col-md-6 order-md-1">

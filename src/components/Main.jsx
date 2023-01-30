@@ -9,19 +9,23 @@ import ContactForm from "./ContactForm";
 import Footer from "./Footer";
 import Popout from "./Popout";
 import Success from "./Success";
-
-function Main({ bookingMade }) {
+import Booking from "./Booking";
+import Faq from "./Faq";
+function Main({ bookingMade, gpLetter }) {
   // for successful payment url
   const [booked, setBooked] = useState(false);
+  const [bookLetter, setBookLetter] = useState(false);
 
   useEffect(() => {
     if (bookingMade) setBooked(true);
+    if (gpLetter) setBookLetter(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="container-max" id="main">
       {booked && <Popout component={<Success setBooked={setBooked} />} />}
+      {bookLetter && <Popout component={<Booking productId={3} />} />}
       <Nav />
       <Header />
       <div className="container" style={{ maxWidth: "800px" }}>
@@ -33,6 +37,8 @@ function Main({ bookingMade }) {
         <About />
         <Spacer linkId="contact" />
         <ContactForm />
+        <Spacer linkId="faq" />
+        <Faq />
         <Footer />
       </div>
     </div>

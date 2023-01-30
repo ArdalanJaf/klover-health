@@ -7,6 +7,7 @@ export const publicSlice = createSlice({
     prices: {
       preAssessment: "",
       assessment: "",
+      docs: "",
     },
     contactForm: {
       email: "",

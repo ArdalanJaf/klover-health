@@ -31,17 +31,16 @@ function Products() {
       <h2 className="text-center mb-4">Bookings</h2>
       <div className="d-md-flex ">
         <div className="w-md-50 me-md-3 d-flex flex-column mb-5 mb-md-0 text-center">
-          <h4>Full Assessment</h4>
+          <h4>In-Person Assessment</h4>
           {prices.assessment && (
             <h5 className="text-muted numFont mb-2">
               £{numToPrice(prices.assessment)}
             </h5>
           )}
           <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
-            The assessment consists of an hour consultation in person or online,
-            depending on what is most comfortable for you. From this assessment
-            a comprehensive report will be written, with NHS procedures in mind,
-            to get you the care you need.
+            The assessment consists of an up to two hours assessment in person.
+            From this assessment a comprehensive report will be written, with
+            NHS procedures in mind, to get you the care you need.
           </p>
 
           <div className="text-center py-2">
@@ -49,7 +48,7 @@ function Products() {
               className="btn btn-primary shadow"
               onClick={() => dispatch(selectProduct(1))}
             >
-              Book Full Assessment
+              Book In-Person Assessment
             </button>{" "}
           </div>
         </div>
@@ -57,17 +56,16 @@ function Products() {
           <Popout component={<Booking productId={1} />} />
         )}
         <div className="w-md-50 ps-md-3 d-flex flex-column text-center">
-          <h4>Initial Consultation</h4>
+          <h4>Remote Assessment</h4>
           {prices.preAssessment && (
             <h5 className="text-muted numFont mb-2">
               £{numToPrice(prices.preAssessment)}
             </h5>
           )}
           <p className="flex-grow-1 mx-auto" style={{ maxWidth: "600px" }}>
-            Not sure a full assessment will help you? Book a 30 minutes
-            consultation call to find out. If you choose to go forward with a
-            full assessment the price of this consultation will be deducted from
-            the total price.
+            The assessment consists of an up to two hours assessment over the
+            phone or zoom. From this assessment a comprehensive report will be
+            written, with NHS procedures in mind, to get you the care you need.
           </p>
 
           <div className="text-center py-2">
@@ -75,7 +73,7 @@ function Products() {
               className="btn btn-primary shadow "
               onClick={() => dispatch(selectProduct(2))}
             >
-              Book Initial Consultation
+              Book Remote Assessment
             </button>
           </div>
         </div>

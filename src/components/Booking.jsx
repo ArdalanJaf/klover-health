@@ -33,7 +33,18 @@ function Booking({ productId }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const price = productId === 1 ? prices.assessment : prices.preAssessment;
+  const price =
+    productId === 1
+      ? prices.assessment
+      : productId === 2
+      ? prices.preAssessment
+      : prices.docs;
+  const productName =
+    productId === 1
+      ? "In-Person Assessment"
+      : productId === 2
+      ? "Remote Assessment"
+      : "GP Letter";
 
   const bookingInfo = {
     productId,
@@ -59,24 +70,25 @@ function Booking({ productId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkCoupon = async (payload) => {
-    try {
-      const results = await axios.post(
-        API_URL + "/stripe/check_coupon",
-        payload
-      );
-      console.log(results);
-      if (results.data.couponError) {
-        setCouponeError(results.data.couponError);
-        setCouponDiscount(0);
-      }
-      if (results.data.discount) {
-        setCouponDiscount(results.data.discount);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // client decided to not use discounts
+  // const checkCoupon = async (payload) => {
+  //   try {
+  //     const results = await axios.post(
+  //       API_URL + "/stripe/check_coupon",
+  //       payload
+  //     );
+  //     console.log(results);
+  //     if (results.data.couponError) {
+  //       setCouponeError(results.data.couponError);
+  //       setCouponDiscount(0);
+  //     }
+  //     if (results.data.discount) {
+  //       setCouponDiscount(results.data.discount);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const requestPaymentIntent = async (payload) => {
     setValidationErrors("");
@@ -136,11 +148,11 @@ function Booking({ productId }) {
           <ul className="list-group mb-3">
             <li className="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 className="my-0">
-                  {productId === 1 ? "Full Assessment" : "Initial Consultation"}
-                </h6>
+                <h6 className="my-0">{productName}</h6>
                 {clientSecret && (
-                  <small>{formatUTCToString(timeslot, false, true)}</small>
+                  <small className="numFont">
+                    {formatUTCToString(timeslot, false, true)}
+                  </small>
                 )}
               </div>
               <span className="text-muted numFont">£{numToPrice(price)}</span>
@@ -163,7 +175,8 @@ function Booking({ productId }) {
             </li>
           </ul>
 
-          {productId === 1 && !clientSecret && (
+          {/* client decided they don't want discounts anymore */
+          /* {productId === 1 && !clientSecret && (
             <div className="card p-2">
               <div className="input-group">
                 <input
@@ -195,7 +208,7 @@ function Booking({ productId }) {
               </div>
               {couponError && <JoiErrorNote error={couponError} />}
             </div>
-          )}
+          )} */}
           <hr className="mb-4 d-md-none" />
         </div>
 

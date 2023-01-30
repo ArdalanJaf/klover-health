@@ -5,29 +5,20 @@ function About() {
     <div>
       <h2 className="text-center mb-4">About</h2>
       <p>
-        I am a Specialty Doctor in Psychiatry with 9 years experience, having
-        worked in General Adult Psychiatry and all of the sub-specialties of
-        psychiatry. For the last three years I have worked for the NHS in a
-        London Borough Crisis Team. Having worked throughout the Global Pandemic
-        from 2020 into 2022, particularly in a heavily under resourced
-        circumstance, I was able to hone my skills in assessing and formulating
-        Mental Health disorders in a pressured environment, and facilitating
-        appropriate care using the most accessible approach.
+        Klover Healthcare utilises medical clinicians who have dedicated
+        themselves to developing psychiatric clinical skills to an excellent
+        standard, providing comprehensive but concise formulations, to place
+        patients who work with Klover Healthcare in the best possible trajectory
+        to recovery.
       </p>{" "}
       <p>
-        This project has come about to relieve the pressure primary healthcare
-        and community mental health services are facing in ever-more pressurised
-        times. My pricing is a reflection of my belief that this should not have
-        to be an option for people who should be able to utilise services fully
-        from the NHS, but as a means of translating the symptoms of a mental
-        health disorder into a clearer direction for both GPs and CMHTs to be
-        directed from. This service is wholly designed to accelerate access to
-        the most suitable care.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores maxime
-        totam reprehenderit ad impedit molestiae voluptatum libero cum aliquam
-        nemo. Libero, labore. Omnis, mollitia aliquid.
+        Klover Healthcare is a group of Doctors who learnt to work under highly
+        pressurised environments during the COVID-19 Global Pandemic, and were
+        able to support all their patients into recovery during the most
+        turbulent of times.Mental Health Services was in heavy demand, more so
+        in densely populated regions of the country in which Klover Healthcare
+        Doctors were proudly able to stand up and demonstrate leadership and
+        expertise in Psychiatry.
       </p>
     </div>
   );

@@ -9,12 +9,13 @@ import { Orbit } from "@uiball/loaders";
 
 function AdminPricing() {
   const token = useSelector((state) => state.admin.login.token);
-  const { assessment, preAssessment } = useSelector(
+  const { assessment, preAssessment, docs } = useSelector(
     (state) => state.public.prices
   );
   const dispatch = useDispatch();
   const [localA, setLocalA] = useState("");
   const [localPA, setLocalPA] = useState("");
+  const [localD, setLocalD] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const getPrices = async () => {
@@ -46,6 +47,7 @@ function AdminPricing() {
     updatePrices({
       assessment: localA !== "" ? priceToNum(localA) : assessment,
       preAssessment: localPA !== "" ? priceToNum(localPA) : preAssessment,
+      docs: localD !== "" ? priceToNum(localD) : docs,
     });
   };
 
@@ -67,7 +69,7 @@ function AdminPricing() {
             <th scope="row">
               <div>
                 <h5 className="mb-0" style={{ maxWidth: "fit-content" }}>
-                  Assessment:
+                  In-Person Assessment:
                 </h5>
               </div>
             </th>
@@ -96,7 +98,7 @@ function AdminPricing() {
             <th scope="row">
               <div>
                 <h5 className="mb-0" style={{ maxWidth: "fit-content" }}>
-                  Pre-Assessment:
+                  Remote Assessment:
                 </h5>
               </div>
             </th>
@@ -121,6 +123,33 @@ function AdminPricing() {
               </div>
             </td>
           </tr>
+          <tr>
+            <th scope="row">
+              <div>
+                <h5 className="mb-0" style={{ maxWidth: "fit-content" }}>
+                  GP Letter:
+                </h5>
+              </div>
+            </th>
+            <td>
+              <div>
+                <h5 className="mb-0 fw-normal numFont">£{numToPrice(docs)}</h5>
+              </div>
+            </td>
+            <td>
+              <div>
+                <input
+                  className="form-control text-center"
+                  value={localD}
+                  onChange={(e) => setLocalD(e.target.value)}
+                  type="number"
+                  onWheel={(e) => e.target.blur()}
+                  style={{ maxWidth: "120px" }}
+                  placeholder="New price..."
+                />
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -128,7 +157,7 @@ function AdminPricing() {
         <button
           className="btn btn-primary shadow"
           onClick={() => handleSubmit()}
-          disabled={!localA && !localPA ? true : false}
+          disabled={!localA && !localPA && !localD ? true : false}
         >
           {isLoading ? (
             <div style={{ display: "flex", justifyContent: "center" }}>

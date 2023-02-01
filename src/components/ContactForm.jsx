@@ -13,7 +13,7 @@ import { Orbit } from "@uiball/loaders";
 
 function ContactForm() {
   const contactErrors = useSelector((state) => state.public.contactErrors);
-  const { name, email, message } = useSelector(
+  const { name, email, message, tel } = useSelector(
     (state) => state.public.contactForm
   );
   const dispatch = useDispatch();
@@ -44,6 +44,14 @@ function ContactForm() {
     }
   };
 
+  const handleSubmit = (e, payload) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessageSent(false);
+    sendContactForm(payload);
+    dispatch(clearContactErrors());
+  };
+
   // remove message sent confirmation if user uses form again
   useEffect(() => {
     if (
@@ -56,17 +64,19 @@ function ContactForm() {
   }, [email, name, message]);
 
   return (
-    <div className="container mb-5 pb-5" id="contact">
+    <div className="container-max mx-5 mx-md-0" id="contact">
       <h2 className="text-center mb-4">Get In Touch</h2>
       <div className="row">
-        <div className="col-12 col-md-6 order-md-2 text-center ">
+        <div className="col-12 col-md-6 order-md-2 text-center mt-md-4">
           <p>
-            Please send a message through this contact form and we will get back
-            to you as soon as possible.
+            If you have any questions or enquieries please send a message
+            through this contact form and we will get back to you as soon as
+            possible.
           </p>
           <p>
             If you are requesting a free pre-assessment phone call, please
-            include your phone number and availability in the message.
+            include your availability in the message (eg. "mon 5pm-7pm, weds
+            11am-4pm").
           </p>
         </div>
         <div className="col-12 col-md-6 order-md-1">
@@ -80,7 +90,10 @@ function ContactForm() {
               value={name}
               onChange={(e) => {
                 dispatch(
-                  setContactForm({ label: e.target.id, value: e.target.value })
+                  setContactForm({
+                    label: e.target.id,
+                    value: e.target.value,
+                  })
                 );
               }}
             />
@@ -100,7 +113,10 @@ function ContactForm() {
               value={email}
               onChange={(e) => {
                 dispatch(
-                  setContactForm({ label: e.target.id, value: e.target.value })
+                  setContactForm({
+                    label: e.target.id,
+                    value: e.target.value,
+                  })
                 );
               }}
             />
@@ -110,6 +126,54 @@ function ContactForm() {
             <label hidden htmlFor="email">
               Your email address.
             </label>
+
+            <input
+              type="tel"
+              name="tel"
+              id="tel"
+              placeholder="Your phone number"
+              className="form-control mt-2"
+              value={tel}
+              onChange={(e) => {
+                dispatch(
+                  setContactForm({
+                    label: e.target.id,
+                    value: e.target.value,
+                  })
+                );
+              }}
+            />
+            {contactErrors.tel !== undefined && (
+              <JoiErrorNote error={contactErrors.tel} />
+            )}
+            <label hidden htmlFor="name">
+              Your name.
+            </label>
+
+            {/* <div className="col-12 mt-2">
+                <input
+                  type="text"
+                  name="times"
+                  id="times"
+                  placeholder="Availability eg: 'mon 11am-5pm, tues 5.30pm-8pm'"
+                  className="form-control"
+                  value={times}
+                  onChange={(e) => {
+                    dispatch(
+                      setContactForm({
+                        label: e.target.id,
+                        value: e.target.value,
+                      })
+                    );
+                  }}
+                />
+                {contactErrors.name !== undefined && (
+                  <JoiErrorNote error={contactErrors.name} />
+                )}
+                <label hidden htmlFor="name">
+                  Your name.
+                </label>
+              </div> */}
 
             <textarea
               className="textbox form-control mt-2"
@@ -143,11 +207,7 @@ function ContactForm() {
                 type="submit"
                 name="submit"
                 onClick={(e) => {
-                  e.preventDefault();
-                  setIsLoading(true);
-                  setMessageSent(false);
-                  sendContactForm({ name, email, message });
-                  dispatch(clearContactErrors());
+                  handleSubmit(e, { name, email, tel, message });
                 }}
                 disabled={name && email && message ? false : true}
               >

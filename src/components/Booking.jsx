@@ -7,19 +7,20 @@ import axios from "axios";
 import { API_URL } from "../API/API_URL";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import JoiErrorNote from "./JoiErrorNote";
+import { kloverStripePubKey } from "../API/STRIPE_PUB_KEY";
 import StripePaymentForm from "./StripePaymentForm";
+import JoiErrorNote from "./JoiErrorNote";
 import formatUTCToString from "../utils/formatUTCToString";
 import { numToPrice } from "../utils/numToPrice";
 import isLocalTimeUKTime from "../utils/isLocalTimeUKTime";
 import { Orbit } from "@uiball/loaders";
 
-const stripePromise = loadStripe(
-  "pk_test_51LkVjTGLHUbhQyEkySqFAYxPty0Ta0C8FNsBcqxaxQp3IRWMKYnMs8FMKBj2mRTgx1kA1UYLYtVNmq7DyqlNBZ9G00uhBudUDG"
-);
+const stripePromise = loadStripe(kloverStripePubKey);
 
-function Booking({ productId }) {
+function Booking() {
   const { availableTs, prices } = useSelector((state) => state.public);
+  const productId = useSelector((state) => state.public.productSelected);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -114,7 +115,7 @@ function Booking({ productId }) {
     theme: "stripe",
     variables: {
       colorPrimary: "#007bff",
-      colorBackground: "rgba(0,0,0,0)",
+      // colorBackground: "rgb(0,0,0,0)",
       fontSizeBase: "1.1rem",
       spacingGridRow: "1.1rem",
     },
@@ -149,7 +150,7 @@ function Booking({ productId }) {
             <li className="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 className="my-0">{productName}</h6>
-                {clientSecret && (
+                {clientSecret && (productId === 1 || productId === 2) && (
                   <small className="numFont">
                     {formatUTCToString(timeslot, false, true)}
                   </small>
@@ -217,38 +218,45 @@ function Booking({ productId }) {
           <div className="col-md-8 order-md-1">
             <div>
               {/* appointment time */}
-              <h4 className="mb-3">Appointment Slot</h4>
-              <div className="mb-3">
-                <label htmlFor="timeslot" className="form-label mb-1 numFont">
-                  Date & time:
-                  {!isLocalTimeUKTime() && (
-                    <>
-                      <br />
-                      <small>(in your current timezone)</small>
-                    </>
-                  )}
-                </label>
-                <select
-                  id="timeslot"
-                  className="form-select"
-                  onChange={(e) => setTimeslot(Number(e.target.value))}
-                  disabled={clientSecret ? true : false}
-                >
-                  <option value={0} label={"Select..."} />
-                  {availableTs.map((time, i) => {
-                    return (
-                      <option
-                        key={i}
-                        value={time}
-                        label={formatUTCToString(time)}
-                      />
-                    );
-                  })}
-                </select>
-                {validationErrors.timeslot && (
-                  <JoiErrorNote error={validationErrors.timeslot} />
-                )}
-              </div>
+              {productId !== 3 && (
+                <>
+                  <h4 className="mb-3">Appointment Slot</h4>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="timeslot"
+                      className="form-label mb-1 numFont"
+                    >
+                      Date & time:
+                      {!isLocalTimeUKTime() && (
+                        <>
+                          <br />
+                          <small>(in your current timezone)</small>
+                        </>
+                      )}
+                    </label>
+                    <select
+                      id="timeslot"
+                      className="form-select"
+                      onChange={(e) => setTimeslot(Number(e.target.value))}
+                      disabled={clientSecret ? true : false}
+                    >
+                      <option value={0} label={"Select..."} />
+                      {availableTs.map((time, i) => {
+                        return (
+                          <option
+                            key={i}
+                            value={time}
+                            label={formatUTCToString(time)}
+                          />
+                        );
+                      })}
+                    </select>
+                    {validationErrors.timeslot && (
+                      <JoiErrorNote error={validationErrors.timeslot} />
+                    )}
+                  </div>
+                </>
+              )}
 
               {/* <hr className="mb-4" /> */}
 

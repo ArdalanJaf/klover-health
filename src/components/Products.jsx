@@ -52,9 +52,9 @@ function Products() {
             </button>{" "}
           </div>
         </div>
-        {productSelected === 1 && (
-          <Popout component={<Booking productId={1} />} />
-        )}
+        {/* {productSelected === 1 && (
+          <Popout component={<Booking />} />
+        )} */}
         <div className="w-md-50 ps-md-3 d-flex flex-column text-center">
           <h4>Remote Assessment</h4>
           {prices.preAssessment && (
@@ -77,10 +77,11 @@ function Products() {
             </button>
           </div>
         </div>
-        {productSelected === 2 && (
-          <Popout component={<Booking productId={2} />} />
-        )}
+        {/* {productSelected === 2 && (
+          <Popout component={<Booking />} />
+        )} */}
       </div>
+      {productSelected && <Popout component={<Booking />} />}
     </div>
   );
 }

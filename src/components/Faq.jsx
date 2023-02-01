@@ -2,7 +2,7 @@ import React from "react";
 
 function Faq() {
   return (
-    <>
+    <div className="text-center text-md-start">
       <h2 className="text-center mb-4 mt-5">FAQ</h2>
       <p className="lead mt-4">Who is this Service for?</p>
       <p>
@@ -77,7 +77,7 @@ function Faq() {
         records, no prescriptions will be prepared. However, we can make
         recommendations for GPs to prescribe medication.
       </p>
-    </>
+    </div>
   );
 }
 

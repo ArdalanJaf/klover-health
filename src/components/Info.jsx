@@ -2,7 +2,7 @@ import React from "react";
 
 function Info() {
   return (
-    <div>
+    <div className="text-center text-md-start">
       <h2 className="text-center mb-4">Specialised Assessments</h2>
       <p className="lead">
         Klover Healthcare was born from an observation of both an overstretched
@@ -45,31 +45,33 @@ function Info() {
         Klover Healthcare ensures it is an advocate for you in accessing mental
         health services.
       </p>
-      <div className="alert alert-danger text-dark fw-bold text-center">
+      <div className="alert alert-danger text-dark fw-bold text-center mt-5">
         If you are having suicidal thoughts or another mental health emergency,
         contact your Local Mental Health Crisis Service or Emergency Services as
         soon as possible.
       </div>
       <div className="mt-5 mb-5"></div>
       <h4 className="text-center mt-3  mb-3">Services Offered</h4>
-      <ul>
+      <ul className="text-start">
         <li>
           FREE 15 minute{" "}
           <a href="#contact">pre-assessment telephone consultation</a> to
           identify mental health concerns.
         </li>
 
-        <li>
+        <li className="mt-2">
           Up to 2 hour Psychiatric assessment (by telephone, zoom or in-person
           options available) to formulate mental health concerns.
         </li>
 
-        <li>
+        <li className="mt-2">
           Assessment report for your GP to action, including treatment
           recommendations, referrals to NHS secondary care services (to be seen
           by an NHS psychiatrist or Community Psychiatric Nurse).
         </li>
-        <li>Signposting to appropriate services local to the patient.</li>
+        <li className="mt-2">
+          Signposting to appropriate services local to the patient.
+        </li>
       </ul>
     </div>
   );

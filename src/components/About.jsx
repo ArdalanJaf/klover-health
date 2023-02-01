@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div>
+    <div className="text-center text-md-start">
       <h2 className="text-center mb-4">About</h2>
       <p>
         Klover Healthcare utilises medical clinicians who have dedicated

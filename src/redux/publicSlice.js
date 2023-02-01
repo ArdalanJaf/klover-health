@@ -13,6 +13,7 @@ export const publicSlice = createSlice({
       email: "",
       name: "",
       message: "",
+      tel: "",
     },
     contactErrors: {},
     productSelected: "",
@@ -38,6 +39,7 @@ export const publicSlice = createSlice({
         email: "",
         name: "",
         message: "",
+        tel: "",
       };
     },
     selectProduct: (state, action) => {

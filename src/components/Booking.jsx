@@ -129,7 +129,7 @@ function Booking() {
   return (
     <div
       className="container bg-light rounded-md h-md-100 m-sm-2"
-      style={{ maxHeight: "100%", overflowY: "scroll" }}
+      style={{ maxHeight: "100%", overflowY: "scroll", maxWidth: "800px" }}
     >
       <div className="row py-3" style={{ position: "relative" }}>
         {/* Close Button */}

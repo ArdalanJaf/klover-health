@@ -3,7 +3,7 @@ import { URL } from "../API/URL";
 
 function Footer({ style }) {
   return (
-    <div className="text-center text-dark mt-5 mb-3 w-100" style={style}>
+    <div className="text-center text-dark pt-5 mt-5 mb-3 w-100" style={style}>
       <small>
         © 2023 Klover Healthcare -{" "}
         <a href={URL + "/terms"}>Terms & Conditions</a>

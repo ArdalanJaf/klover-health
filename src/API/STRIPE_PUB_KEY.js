@@ -1,5 +1,7 @@
-export const kloverStripePubKey =
-  "pk_test_51MT2zXGZwWYDc3r9gQFA7cvNCUNnsrlW4D12MByzBOv3crT2gD5CRWf8yKlboSUovddczkhKcxPDZt0LuIwWesrn00XKJsDnWW";
+const liveKey =
+  "pk_live_51MT2zXGZwWYDc3r93nqCjrlu50kN3hjaxGFYNouC5XeoSUrhxY3DVzK0lumI8B0lUldNmef9gp5vUMEThklsEXd500Zwdzl3F1";
 
 const testKey =
-  "pk_test_51LkVjTGLHUbhQyEkySqFAYxPty0Ta0C8FNsBcqxaxQp3IRWMKYnMs8FMKBj2mRTgx1kA1UYLYtVNmq7DyqlNBZ9G00uhBudUDG";
+  "pk_test_51MT2zXGZwWYDc3r9gQFA7cvNCUNnsrlW4D12MByzBOv3crT2gD5CRWf8yKlboSUovddczkhKcxPDZt0LuIwWesrn00XKJsDnWW";
+
+export const kloverStripePubKey = testKey;

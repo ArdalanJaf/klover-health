@@ -8,7 +8,7 @@ import { Orbit } from "@uiball/loaders";
 const AdminLogin = ({ setLoggedIn }) => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("klover_admin");
-  const [password, setPassword] = useState("klj1n24kln1!@#ajklnf");
+  const [password, setPassword] = useState("KloverAdmin2023");
   // DEMO
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState("");
@@ -96,7 +96,7 @@ const AdminLogin = ({ setLoggedIn }) => {
           </button>
         </div>
         {error && (
-          <div>
+          <div className="mt-3 text-danger">
             <p>{error}</p>
           </div>
         )}

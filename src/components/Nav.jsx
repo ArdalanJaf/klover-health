@@ -68,7 +68,7 @@ function Nav() {
             <a className="nav-link nav-item text-dark" href={URL + "/#contact"}>
               Contact
             </a>
-            <a className="nav-link nav-item text-dark" href={URL + "/faq"}>
+            <a className="nav-link nav-item text-dark" href={URL + "/#faq"}>
               FAQ
             </a>
           </div>

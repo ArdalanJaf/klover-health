@@ -7,8 +7,8 @@ import { Orbit } from "@uiball/loaders";
 
 const AdminLogin = ({ setLoggedIn }) => {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState("klover_admin");
-  const [password, setPassword] = useState("KloverAdmin2023");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   // DEMO
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState("");

@@ -10,15 +10,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Outlet />}>
           <Route index element={<Main />} />
-          <Route path="booked" element={<Main bookingMade={true} />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="letter" element={<Main gpLetter={true} />} />
-          <Route path="terms" element={<Smallprint content={0} />} />
+          <Route exact path="booked" element={<Main bookingMade={true} />} />
+          <Route exact path="admin" element={<Admin />} />
+          <Route exact path="letter" element={<Main gpLetter={true} />} />
+          <Route exact path="terms" element={<Smallprint content={0} />} />
           <Route
+            exact
             path="modernslaverypolicy"
             element={<Smallprint content={1} />}
           />
-
           <Route path="*" element={<p>Error 404, Page does not exist.</p>} />
         </Route>
       </Routes>

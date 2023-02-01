@@ -4,4 +4,4 @@ const liveKey =
 const testKey =
   "pk_test_51MT2zXGZwWYDc3r9gQFA7cvNCUNnsrlW4D12MByzBOv3crT2gD5CRWf8yKlboSUovddczkhKcxPDZt0LuIwWesrn00XKJsDnWW";
 
-export const kloverStripePubKey = testKey;
+export const kloverStripePubKey = liveKey;

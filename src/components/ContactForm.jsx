@@ -64,10 +64,10 @@ function ContactForm() {
   }, [email, name, message]);
 
   return (
-    <div className="container-max mx-5 mx-md-0" id="contact">
+    <div className="container-max mx-2 mx-sm-5 mx-md-0" id="contact">
       <h2 className="text-center mb-4">Get In Touch</h2>
       <div className="row">
-        <div className="col-12 col-md-6 order-md-2 text-center mt-md-4">
+        <div className="col-12 col-md-6 order-md-2 text-center mt-md-4 mb-4">
           <p>
             If you have any questions or enquieries please send a message
             through this contact form and we will get back to you as soon as

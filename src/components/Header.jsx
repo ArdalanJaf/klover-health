@@ -19,10 +19,10 @@ function Header() {
         }}
       >
         <h1
-          className="display-3 fw-bold mx-auto text-white md-5 mb-sm-4 "
+          className="display-3 mx-auto text-white md-5 mb-sm-4 "
           style={{ maxWidth: "80%" }}
         >
-          Get the NHS mental health support you need.
+          Get the mental health support you need.
         </h1>
 
         {/* call to action */}
